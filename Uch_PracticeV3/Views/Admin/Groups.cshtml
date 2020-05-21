@@ -1,0 +1,105 @@
+﻿@using Uch_PracticeV3.Models
+@model List<Group>
+@{
+    ViewBag.Title = "Groups";
+}
+
+<div class="row justify-content-between">
+    <div class="col-md-4 col-sm-6">
+        <h2 class="text-primary my-4">Таблица групп:</h2>
+    </div>
+    <div class="col-md-4 col-sm-6 d-flex flex-column justify-content-around">
+        <div class="row align-items-center">
+            <button id="add-button" class="col-lg mx-2 btn btn-success">Добавить</button>
+            <button id="edit-button" class="col-lg mx-2 btn btn-warning">Изменить</button>
+            <button id="delete-button" class="col-lg mx-2 btn btn-danger">Удалить</button>
+        </div>
+    </div>
+</div>
+<table class="table" id="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Код</th>
+            <th scope="col">Название</th>
+            <th scope="col">Направление подготовки</th>
+            <th scope="col">Студенты</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Group group in Model)
+        {
+        <tr>
+            <th scope="row">@group.Id</th>
+            <td>@group.Naming</td>
+            <td>@group.Specialty.Educational_Program</td>
+            <td>
+                @if (group.Students.Count == 0)
+                {
+                    <span>Пусто...</span>
+                }
+                else
+                {
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle btn-info" type="button" id="dropdownMenuButton"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @group.Students.First().Surname
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            @foreach (Student student in group.Students)
+                            {
+                                <span class="dropdown-item">@student.Surname</span>
+                            }
+                        </div>
+                    </div>
+                }
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        @if (ViewBag.PageIndex != 1)
+        {
+            <li class="page-item">
+                <a class="page-link" href="Groups?page=@(@ViewBag.PageIndex - 1)" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        }
+
+        @if (ViewBag.PageIndex != 1)
+        {
+            <li class="page-item"><a class="page-link" href="Groups?page=1">1</a></li>
+        }
+
+        <li class="page-item active"><a class="page-link" href="Groups?page=@ViewBag.PageIndex">@ViewBag.PageIndex</a></li>
+
+        @if (ViewBag.NextPageExists)
+        {
+            <li class="page-item"><a class="page-link" href="Groups?page=@(@ViewBag.PageIndex + 1)">@(@ViewBag.PageIndex + 1)</a></li>
+            <li class="page-item">
+                <a class="page-link" href="Groups?page=@(@ViewBag.PageIndex + 1)" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        }
+    </ul>
+</nav>
+
+<script>
+    const addButtonClickListener = (action = 'edit') => {
+        $(`#${action}-button`).on('click', () => {
+            if ($('table').children('tbody').first().children('tr').hasClass('selectable')){
+                return;
+            }
+            $('#table').children('tbody').first().children('tr').addClass('selectable').on('click', event => {
+                const id = event.target.closest('tr').firstElementChild.textContent;
+                window.location.assign(`/Admin/Groups?action=${action}&rowId=${id}`);
+            });
+        });
+    };
+    $('#add-button').on('click', () => window.location.replace('/Admin/Groups?action=add'));
+    addButtonClickListener('edit');
+    addButtonClickListener('delete');
+</script>

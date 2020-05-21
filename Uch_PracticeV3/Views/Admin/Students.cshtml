@@ -1,0 +1,93 @@
+﻿@using Uch_PracticeV3.Models
+@model List<Student>
+@{
+    ViewBag.Title = "Students";
+}
+
+<div class="row justify-content-between">
+    <div class="col-md-4 col-sm-6">
+        <h2 class="text-primary my-4">Таблица студентов:</h2>
+    </div>
+    <div class="col-md-4 col-sm-6 d-flex flex-column justify-content-around">
+        <div class="row align-items-center">
+            <button id="add-button" class="col-lg mx-2 btn btn-success">Добавить</button>
+            <button id="edit-button" class="col-lg mx-2 btn btn-warning">Изменить</button>
+            <button id="delete-button" class="col-lg mx-2 btn btn-danger">Удалить</button>
+        </div>
+    </div>
+</div>
+<table class="table" id="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Код</th>
+            <th scope="col">Фамилия</th>
+            <th scope="col">Имя</th>
+            <th scope="col">Отчество</th>
+            <th scope="col">Группа</th>
+            <th scope="col">Руководитель</th>
+            <th scope="col">Договор</th>
+            <th scope="col">Результат</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Student student in Model)
+        {
+        <tr>
+            <th scope="row">@student.Id</th>
+            <td>@student.Surname</td>
+            <td>@student.Name</td>
+            <td>@student.Patronymic</td>
+            <td>@student.Group.Naming</td>
+            <td>@student.Leader.Surname</td>
+            <td>@student.Contract.Enter_Date</td>
+            <td>@student.Result</td>
+        </tr>
+        }
+    </tbody>
+</table>
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        @if (ViewBag.PageIndex != 1)
+        {
+            <li class="page-item">
+                <a class="page-link" href="Students?page=@(@ViewBag.PageIndex - 1)" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        }
+
+        @if (ViewBag.PageIndex != 1)
+        {
+            <li class="page-item"><a class="page-link" href="Students?page=1">1</a></li>
+        }
+
+        <li class="page-item active"><a class="page-link" href="Students?page=@ViewBag.PageIndex">@ViewBag.PageIndex</a></li>
+
+        @if (ViewBag.NextPageExists)
+        {
+            <li class="page-item"><a class="page-link" href="Students?page=@(@ViewBag.PageIndex + 1)">@(@ViewBag.PageIndex + 1)</a></li>
+            <li class="page-item">
+                <a class="page-link" href="Students?page=@(@ViewBag.PageIndex + 1)" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        }
+    </ul>
+</nav>
+
+<script>
+    const addButtonClickListener = (action = 'edit') => {
+        $(`#${action}-button`).on('click', () => {
+            if ($('table').children('tbody').first().children('tr').hasClass('selectable')){
+                return;
+            }
+            $('#table').children('tbody').first().children('tr').addClass('selectable').on('click', event => {
+                const id = event.target.closest('tr').firstElementChild.textContent;
+                window.location.assign(`/Admin/Students?action=${action}&rowId=${id}`);
+            });
+        });
+    };
+    $('#add-button').on('click', () => window.location.replace('/Admin/Students?action=add'));
+    addButtonClickListener('edit');
+    addButtonClickListener('delete');
+</script>

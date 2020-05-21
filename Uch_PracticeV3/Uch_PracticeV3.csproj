@@ -319,6 +319,20 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\Contracts.cshtml" />
     <Content Include="Views\Admin\ModifyContract.cshtml" />
+    <Content Include="Views\Admin\Groups.cshtml" />
+    <Content Include="Views\Admin\ModifyGroup.cshtml" />
+    <Content Include="Views\Admin\Leaders.cshtml" />
+    <Content Include="Views\Admin\ModifyLeader.cshtml" />
+    <Content Include="Views\Admin\Organizations.cshtml" />
+    <Content Include="Views\Admin\ModifyOrganization.cshtml" />
+    <Content Include="Views\Admin\Ranks.cshtml" />
+    <Content Include="Views\Admin\ModifyRank.cshtml" />
+    <Content Include="Views\Admin\Sectors.cshtml" />
+    <Content Include="Views\Admin\ModifySector.cshtml" />
+    <Content Include="Views\Admin\Specialties.cshtml" />
+    <Content Include="Views\Admin\ModifySpecialty.cshtml" />
+    <Content Include="Views\Admin\Students.cshtml" />
+    <Content Include="Views\Admin\ModifyStudent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
