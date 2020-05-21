@@ -1,0 +1,2 @@
+C:\Users\Кирилл\source\repos\Uch_PracticeV3\Uch_PracticeV3.Tests\obj\Debug\Uch_PracticeV3.Tests.csprojAssemblyReference.cache
+C:\Users\Кирилл\source\repos\Uch_PracticeV3\Uch_PracticeV3.Tests\obj\Debug\Uch_PracticeV3.Tests.csproj.CoreCompileInputs.cache

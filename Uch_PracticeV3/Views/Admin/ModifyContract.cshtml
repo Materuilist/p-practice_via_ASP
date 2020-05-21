@@ -1,0 +1,56 @@
+﻿@using Uch_PracticeV3.Models
+@model Contract
+@{
+    ViewBag.Title = ViewBag.Action;
+}
+
+    <form action="/Admin/Contracts/@ViewBag.Action" method="post">
+        @if (ViewBag.Action == "edit")
+        {
+            <input hidden name="Id" value="@ViewBag.Contract.Id"/>
+        }
+        <div class="form-group">
+            <label for="OrganizationId">Организация</label>
+            <select class="form-control" name="OrganizationId" id="OrganizationId">
+                @foreach (Organization org in ViewBag.Organizations)
+                {
+                    if (ViewBag.Action == "edit")
+                    {
+                        <option selected="@(@org.Id == @ViewBag.Contract.OrganizationId)" data-toggle="tooltip"
+                                data-placement="right" title="@org.FullNaming">
+                            @org.Id
+                            </option>
+                        }
+                        else
+                        {
+                            <option data-toggle="tooltip" data-placement="right" title="@org.FullNaming">@org.Id</option>
+                        }
+                    }
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="Enter_Date">Дата заключения</label>
+            @if (ViewBag.Action == "edit")
+            {
+                <input name="Enter_Date" type="date" class="form-control" id="Enter_Date"
+                        value="@(@ViewBag.Contract.Enter_Date?.ToString("yyyy-MM-dd"))">
+            }
+            else
+            {
+                <input name="Enter_Date" type="date" class="form-control" id="Enter_Date">
+            }
+        </div>
+        <div class="form-group">
+            <label class="form-check-label" for="Termination_Date">Дата расторжения</label>
+            @if (ViewBag.Action == "edit")
+            {
+                <input name="Termination_Date" type="date" class="form-control" id="Termination_Date"
+                        value="@(@ViewBag.Contract.Termination_Date?.ToString("yyyy-MM-dd"))">
+            }
+            else
+            {
+                <input name="Termination_Date" type="date" class="form-control" id="Termination_Date">
+            }
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>

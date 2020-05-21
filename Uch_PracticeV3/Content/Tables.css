@@ -1,0 +1,4 @@
+﻿.selectable:hover{
+    opacity:.5;
+    cursor:pointer;
+}

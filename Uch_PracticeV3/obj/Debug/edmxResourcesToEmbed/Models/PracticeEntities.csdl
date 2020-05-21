@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Uch_PracticeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Contract">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrganizationId" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Enter_Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Termination_Date" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Students" Relationship="Self.FK_ContractId_Students" FromRole="Contracts" ToRole="Students" />
+    <NavigationProperty Name="Organization" Relationship="Self.FK_OrganizationId_Contracts" FromRole="Contracts" ToRole="Organizations" />
+  </EntityType>
+  <EntityType Name="Group">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Naming" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SpecialtyId" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Students" Relationship="Self.FK_GroupId_Students" FromRole="Groups" ToRole="Students" />
+    <NavigationProperty Name="Specialty" Relationship="Self.FK_SpecialtyId_Groups" FromRole="Groups" ToRole="Specialties" />
+  </EntityType>
+  <EntityType Name="Leader">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Surname" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Patronymic" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="RankId" Type="Int32" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Students" Relationship="Self.FK_LeaderId_Students" FromRole="Leaders" ToRole="Students" />
+    <NavigationProperty Name="Rank" Relationship="Self.FK_RankId_Leaders" FromRole="Leaders" ToRole="Ranks" />
+  </EntityType>
+  <EntityType Name="Organization">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ShortNaming" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="FullNaming" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SectorId" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Contracts" Relationship="Self.FK_OrganizationId_Contracts" FromRole="Organizations" ToRole="Contracts" />
+    <NavigationProperty Name="Sector" Relationship="Self.FK_SectorId_Organizations" FromRole="Organizations" ToRole="Sectors" />
+  </EntityType>
+  <EntityType Name="Rank">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Naming" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Leaders" Relationship="Self.FK_RankId_Leaders" FromRole="Ranks" ToRole="Leaders" />
+  </EntityType>
+  <EntityType Name="Sector">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Naming" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Organizations" Relationship="Self.FK_SectorId_Organizations" FromRole="Sectors" ToRole="Organizations" />
+  </EntityType>
+  <EntityType Name="Specialty">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Educational_Program" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Groups" Relationship="Self.FK_SpecialtyId_Groups" FromRole="Specialties" ToRole="Groups" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Surname" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Patronymic" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="GroupId" Type="Int32" Nullable="false" />
+    <Property Name="ContractId" Type="Int32" Nullable="false" />
+    <Property Name="LeaderId" Type="Int32" Nullable="false" />
+    <Property Name="Result" Type="Int32" />
+    <NavigationProperty Name="Contract" Relationship="Self.FK_ContractId_Students" FromRole="Students" ToRole="Contracts" />
+    <NavigationProperty Name="Group" Relationship="Self.FK_GroupId_Students" FromRole="Students" ToRole="Groups" />
+    <NavigationProperty Name="Leader" Relationship="Self.FK_LeaderId_Students" FromRole="Students" ToRole="Leaders" />
+  </EntityType>
+  <Association Name="FK_ContractId_Students">
+    <End Role="Contracts" Type="Self.Contract" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Students" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contracts">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="ContractId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrganizationId_Contracts">
+    <End Role="Organizations" Type="Self.Organization" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Contracts" Type="Self.Contract" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organizations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Contracts">
+        <PropertyRef Name="OrganizationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupId_Students">
+    <End Role="Groups" Type="Self.Group" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Students" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Groups">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SpecialtyId_Groups">
+    <End Role="Specialties" Type="Self.Specialty" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Groups" Type="Self.Group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Specialties">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Groups">
+        <PropertyRef Name="SpecialtyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LeaderId_Students">
+    <End Role="Leaders" Type="Self.Leader" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Students" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Leaders">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="LeaderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RankId_Leaders">
+    <End Role="Ranks" Type="Self.Rank" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Leaders" Type="Self.Leader" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ranks">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Leaders">
+        <PropertyRef Name="RankId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SectorId_Organizations">
+    <End Role="Sectors" Type="Self.Sector" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Organizations" Type="Self.Organization" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sectors">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Organizations">
+        <PropertyRef Name="SectorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="UCH_PracticeEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Contracts" EntityType="Self.Contract" />
+    <EntitySet Name="Groups" EntityType="Self.Group" />
+    <EntitySet Name="Leaders" EntityType="Self.Leader" />
+    <EntitySet Name="Organizations" EntityType="Self.Organization" />
+    <EntitySet Name="Ranks" EntityType="Self.Rank" />
+    <EntitySet Name="Sectors" EntityType="Self.Sector" />
+    <EntitySet Name="Specialties" EntityType="Self.Specialty" />
+    <EntitySet Name="Students" EntityType="Self.Student" />
+    <AssociationSet Name="FK_ContractId_Students" Association="Self.FK_ContractId_Students">
+      <End Role="Contracts" EntitySet="Contracts" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrganizationId_Contracts" Association="Self.FK_OrganizationId_Contracts">
+      <End Role="Organizations" EntitySet="Organizations" />
+      <End Role="Contracts" EntitySet="Contracts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupId_Students" Association="Self.FK_GroupId_Students">
+      <End Role="Groups" EntitySet="Groups" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SpecialtyId_Groups" Association="Self.FK_SpecialtyId_Groups">
+      <End Role="Specialties" EntitySet="Specialties" />
+      <End Role="Groups" EntitySet="Groups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LeaderId_Students" Association="Self.FK_LeaderId_Students">
+      <End Role="Leaders" EntitySet="Leaders" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RankId_Leaders" Association="Self.FK_RankId_Leaders">
+      <End Role="Ranks" EntitySet="Ranks" />
+      <End Role="Leaders" EntitySet="Leaders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SectorId_Organizations" Association="Self.FK_SectorId_Organizations">
+      <End Role="Sectors" EntitySet="Sectors" />
+      <End Role="Organizations" EntitySet="Organizations" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
