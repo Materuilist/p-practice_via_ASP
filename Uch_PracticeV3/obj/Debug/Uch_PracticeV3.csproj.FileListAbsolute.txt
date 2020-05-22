@@ -144,3 +144,17 @@ C:\Users\Кирилл\source\repos\Uch_PracticeV3\Uch_PracticeV3\bin\System.Nume
 C:\Users\Кирилл\source\repos\Uch_PracticeV3\Uch_PracticeV3\bin\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\Кирилл\source\repos\Uch_PracticeV3\Uch_PracticeV3\bin\System.Threading.Tasks.Extensions.xml
 C:\Users\Кирилл\source\repos\Uch_PracticeV3\Uch_PracticeV3\bin\ru\EntityFramework.SqlServer.resources.dll
+C:\Users\Кирилл\source\repos\Uch_PracticeV3\Uch_PracticeV3\bin\ClosedXML.dll
+C:\Users\Кирилл\source\repos\Uch_PracticeV3\Uch_PracticeV3\bin\DocumentFormat.OpenXml.dll
+C:\Users\Кирилл\source\repos\Uch_PracticeV3\Uch_PracticeV3\bin\ExcelNumberFormat.dll
+C:\Users\Кирилл\source\repos\Uch_PracticeV3\Uch_PracticeV3\bin\System.IO.Packaging.dll
+C:\Users\Кирилл\source\repos\Uch_PracticeV3\Uch_PracticeV3\bin\ClosedXML.pdb
+C:\Users\Кирилл\source\repos\Uch_PracticeV3\Uch_PracticeV3\bin\ClosedXML.xml
+C:\Users\Кирилл\source\repos\Uch_PracticeV3\Uch_PracticeV3\bin\DocumentFormat.OpenXml.xml
+C:\Users\Кирилл\source\repos\Uch_PracticeV3\Uch_PracticeV3\bin\ExcelNumberFormat.xml
+C:\Users\Кирилл\source\repos\Uch_PracticeV3\Uch_PracticeV3\obj\Debug\Uch_PracticeV3.csproj.ResolveComReference.cache
+C:\Users\Кирилл\source\repos\Uch_PracticeV3\Uch_PracticeV3\bin\Aspose.Tasks.dll
+C:\Users\Кирилл\source\repos\Uch_PracticeV3\Uch_PracticeV3\bin\Aspose.Words.dll
+C:\Users\Кирилл\source\repos\Uch_PracticeV3\Uch_PracticeV3\bin\Aspose.Words.Pdf2Word.dll
+C:\Users\Кирилл\source\repos\Uch_PracticeV3\Uch_PracticeV3\bin\Aspose.Tasks.xml
+C:\Users\Кирилл\source\repos\Uch_PracticeV3\Uch_PracticeV3\bin\Aspose.Words.xml

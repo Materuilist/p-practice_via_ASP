@@ -1,0 +1,38 @@
+﻿@using Uch_PracticeV3.OfficeInteraction
+@model EnterParams
+
+<div class="row justify-content-between">
+    <div class="col-md-4 col-sm-6">
+        <h2 class="text-primary my-4">@ViewBag.Title:</h2>
+    </div>
+    <div class="col-md-4 col-sm-6 d-flex flex-column justify-content-around">
+        <div class="row align-items-center">
+            <button onclick="window.location.assign(window.location.href.split('=')[0] + '=excel')" id="add-button" class="col-lg mx-2 btn btn-success">Excel</button>
+            <button onclick="window.location.assign(window.location.href.split('=')[0] + '=word')" id="edit-button" class="col-lg mx-2 btn btn-warning">Word</button>
+        </div>
+    </div>
+</div>
+<table class="table" id="table">
+    <thead class="thead-dark">
+        <tr>
+            @foreach(string col in Model.colnames)
+            {
+                <th scope="col">@col</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (List<string> row in Model.rows)
+        {
+            <tr>
+                @*Это всегда Id*@
+                <th scope="row">@row[0]</th>
+                @* Кроме кода *@
+                @foreach(string rowItem in row.Except(new List<string>() { row[0]}))
+                {
+                    <td>@rowItem</td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
