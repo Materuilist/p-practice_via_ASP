@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище Uch_PracticeModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище PracticeEntities" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Contracts">
           <Key>
             <PropertyRef Name="Id" />
@@ -32,7 +32,7 @@
           <Property Name="Patronymic" Type="nvarchar" MaxLength="30" />
           <Property Name="RankId" Type="int" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="40" />
-          <Property Name="Phone" Type="nvarchar" MaxLength="15" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="11" />
         </EntityType>
         <EntityType Name="Organizations">
           <Key>
@@ -75,6 +75,8 @@
           <Property Name="GroupId" Type="int" Nullable="false" />
           <Property Name="ContractId" Type="int" Nullable="false" />
           <Property Name="LeaderId" Type="int" Nullable="false" />
+          <Property Name="FileNaming" Type="nvarchar" MaxLength="50" />
+          <Property Name="FileData" Type="nvarchar(max)" />
           <Property Name="Result" Type="int" />
         </EntityType>
         <Association Name="FK_ContractId_Students">
@@ -175,7 +177,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Хранилище Uch_PracticeModelContainer">
+        <EntityContainer Name="Хранилище PracticeEntitiesContainer">
           <EntitySet Name="Contracts" EntityType="Self.Contracts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Leaders" EntityType="Self.Leaders" Schema="dbo" store:Type="Tables" />
@@ -217,7 +219,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="Uch_PracticeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="PracticeEntities" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Contract">
           <Key>
             <PropertyRef Name="Id" />
@@ -249,7 +251,7 @@
           <Property Name="Patronymic" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="RankId" Type="Int32" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
-          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Students" Relationship="Self.FK_LeaderId_Students" FromRole="Leaders" ToRole="Students" />
           <NavigationProperty Name="Rank" Relationship="Self.FK_RankId_Leaders" FromRole="Leaders" ToRole="Ranks" />
         </EntityType>
@@ -299,6 +301,8 @@
           <Property Name="GroupId" Type="Int32" Nullable="false" />
           <Property Name="ContractId" Type="Int32" Nullable="false" />
           <Property Name="LeaderId" Type="Int32" Nullable="false" />
+          <Property Name="FileNaming" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FileData" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Result" Type="Int32" />
           <NavigationProperty Name="Contract" Relationship="Self.FK_ContractId_Students" FromRole="Students" ToRole="Contracts" />
           <NavigationProperty Name="Group" Relationship="Self.FK_GroupId_Students" FromRole="Students" ToRole="Groups" />
@@ -402,7 +406,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="UCH_PracticeEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Uch_PracticeEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Contracts" EntityType="Self.Contract" />
           <EntitySet Name="Groups" EntityType="Self.Group" />
           <EntitySet Name="Leaders" EntityType="Self.Leader" />
@@ -445,9 +449,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище Uch_PracticeModelContainer" CdmEntityContainer="UCH_PracticeEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище PracticeEntitiesContainer" CdmEntityContainer="Uch_PracticeEntities">
           <EntitySetMapping Name="Contracts">
-            <EntityTypeMapping TypeName="Uch_PracticeModel.Contract">
+            <EntityTypeMapping TypeName="PracticeEntities.Contract">
               <MappingFragment StoreEntitySet="Contracts">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
@@ -457,7 +461,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Groups">
-            <EntityTypeMapping TypeName="Uch_PracticeModel.Group">
+            <EntityTypeMapping TypeName="PracticeEntities.Group">
               <MappingFragment StoreEntitySet="Groups">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Naming" ColumnName="Naming" />
@@ -466,7 +470,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Leaders">
-            <EntityTypeMapping TypeName="Uch_PracticeModel.Leader">
+            <EntityTypeMapping TypeName="PracticeEntities.Leader">
               <MappingFragment StoreEntitySet="Leaders">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
@@ -479,7 +483,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Organizations">
-            <EntityTypeMapping TypeName="Uch_PracticeModel.Organization">
+            <EntityTypeMapping TypeName="PracticeEntities.Organization">
               <MappingFragment StoreEntitySet="Organizations">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="ShortNaming" ColumnName="ShortNaming" />
@@ -489,7 +493,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Ranks">
-            <EntityTypeMapping TypeName="Uch_PracticeModel.Rank">
+            <EntityTypeMapping TypeName="PracticeEntities.Rank">
               <MappingFragment StoreEntitySet="Ranks">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Naming" ColumnName="Naming" />
@@ -497,7 +501,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Sectors">
-            <EntityTypeMapping TypeName="Uch_PracticeModel.Sector">
+            <EntityTypeMapping TypeName="PracticeEntities.Sector">
               <MappingFragment StoreEntitySet="Sectors">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Naming" ColumnName="Naming" />
@@ -505,7 +509,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Specialties">
-            <EntityTypeMapping TypeName="Uch_PracticeModel.Specialty">
+            <EntityTypeMapping TypeName="PracticeEntities.Specialty">
               <MappingFragment StoreEntitySet="Specialties">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Educational_Program" ColumnName="Educational_Program" />
@@ -513,7 +517,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Students">
-            <EntityTypeMapping TypeName="Uch_PracticeModel.Student">
+            <EntityTypeMapping TypeName="PracticeEntities.Student">
               <MappingFragment StoreEntitySet="Students">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
@@ -522,6 +526,8 @@
                 <ScalarProperty Name="GroupId" ColumnName="GroupId" />
                 <ScalarProperty Name="ContractId" ColumnName="ContractId" />
                 <ScalarProperty Name="LeaderId" ColumnName="LeaderId" />
+                <ScalarProperty Name="FileNaming" ColumnName="FileNaming" />
+                <ScalarProperty Name="FileData" ColumnName="FileData" />
                 <ScalarProperty Name="Result" ColumnName="Result" />
               </MappingFragment>
             </EntityTypeMapping>

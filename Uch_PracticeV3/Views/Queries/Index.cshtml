@@ -2,36 +2,62 @@
     ViewBag.Title = "Просмотр данных";
 }
 
+<!-- Modal -->
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">...</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input id="modalInput"/>
+            </div>
+            <div class="modal-footer">
+                <button id="modalExecuteButton" type="button" class="btn btn-success">Выполнить</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <h3 class="text-primary my-4 text-center">Какая информация вас интересует?</h3>
 <div class="list-group w-50 mx-auto">
-    <div class="btn-group dropright list-group-item list-group-item-action px-0 py-0">
-        <button class="btn btn-light dropdown-toggle w-100 py-3" type="button" id="query_1DropdownButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <div class="list-group-item list-group-item-action px-0 py-0">
+        <button class="btn btn-light w-100 py-3" type="button" onclick="window.location.assign('/Queries/Marks?format=tab')">
             Оценки студентов
         </button>
-        <div class="dropdown-menu" aria-labelledby="query_1DropdownButton">
-            <a class="dropdown-item" href="/Queries/Marks?format=tab">Просмотр в новой вкладке</a>
-            <a class="dropdown-item" href="/Queries/Marks?format=excel">Скачать таблицу Excel</a>
-            <a class="dropdown-item" href="/Queries/Marks?format=word">Скачать таблицу Word</a>
+    </div>
+    <div class="btn-group dropright list-group-item list-group-item-action px-0 py-0">
+        <button class="btn btn-light dropdown-toggle w-100 py-3" type="button" id="query_2DropdownButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Студенты с оценкой __
+        </button>
+        <div class="dropdown-menu" aria-labelledby="query_2DropdownButton" id="query_2Buttons">
+            <button type="button" modal-label="Оценка студента:" modal-input-type="number" modal-link="/Queries/Marks?format=tab" class="btn dropdown-item btn-primary" data-toggle="modal"
+                    data-target="#modal">
+                Просмотр в новой вкладке
+            </button>
+            <button type="button" modal-label="Оценка студента:" modal-input-type="number" modal-link="/Queries/Marks?format=excel" class="btn dropdown-item btn-primary" data-toggle="modal"
+                    data-target="#modal">
+                Скачать таблицу Excel
+            </button>
+            <button type="button" modal-label="Оценка студента:" modal-input-type="number" modal-link="/Queries/Marks?format=word" class="btn dropdown-item btn-primary" data-toggle="modal"
+                    data-target="#modal">
+                Скачать таблицу Word
+            </button>
         </div>
     </div>
     <div class="btn-group dropright list-group-item list-group-item-action px-0 py-0">
-        <button class="btn btn-light dropdown-toggle w-100 py-3" type="button" id="query_1DropdownButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Кнопка выпадающего списка
+        <button class="btn btn-light dropdown-toggle w-100 py-3" type="button" id="query_3DropdownButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Студенты с оценкой __
         </button>
-        <div class="dropdown-menu" aria-labelledby="query_1DropdownButton">
-            <a class="dropdown-item" href="#1">Просмотр в новой вкладке</a>
-            <a class="dropdown-item" href="#2">Скачать таблицу Excel</a>
-            <a class="dropdown-item" href="#3">Скачать таблицу Word</a>
-        </div>
-    </div>
-    <div class="btn-group dropright list-group-item list-group-item-action px-0 py-0">
-        <button class="btn btn-light dropdown-toggle w-100 py-3" type="button" id="query_1DropdownButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Кнопка выпадающего списка
-        </button>
-        <div class="dropdown-menu" aria-labelledby="query_1DropdownButton">
-            <a class="dropdown-item" href="#1">Просмотр в новой вкладке</a>
-            <a class="dropdown-item" href="#2">Скачать таблицу Excel</a>
-            <a class="dropdown-item" href="#3">Скачать таблицу Word</a>
+        <div class="dropdown-menu" aria-labelledby="query_3DropdownButton">
+            <button type="button" class="btn dropdown-item btn-primary" data-toggle="modal"
+                    data-target="#modal">
+                Просмотр в новой вкладке
+            </button>
         </div>
     </div>
     <div class="btn-group dropright list-group-item list-group-item-action px-0 py-0">
@@ -86,3 +112,21 @@
     </div>
 </div>
 
+<script>
+    const changeModal = (label, inputType, link) => {
+        $('#modalLabel').text(label);
+        $('#modalInput').attr('type', inputType);
+        if (label === 'Оценка студента:') {
+            $('#modalInput').attr('max', 10);
+            $('#modalInput').attr('min', 0);
+            $('#modalInput').attr('value', 6);
+        }
+        $('#modalExecuteButton').on('click', () => {
+            window.location.assign(link + '&param=' + $('#modalInput').val());
+        })
+    }
+    $('#query_2Buttons').children('button').on('click', ({ target }) => {
+        const [, label, inputType, link] = target.attributes;
+        changeModal(label.value, inputType.value, link.value);
+    });
+</script>

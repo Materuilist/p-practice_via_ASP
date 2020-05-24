@@ -26,6 +26,7 @@
             <th scope="col">Группа</th>
             <th scope="col">Руководитель</th>
             <th scope="col">Договор</th>
+            <th scope="col">Файл</th>
             <th scope="col">Результат</th>
         </tr>
     </thead>
@@ -40,6 +41,21 @@
             <td>@student.Group.Naming</td>
             <td>@student.Leader.Surname</td>
             <td>@student.Contract.Enter_Date</td>
+            @if (student.FileData != null)
+            {
+                if (student.FileNaming != null)
+                {
+                    <td><a href="@student.FileData" download="@(@student.FileNaming+".docx")">@student.FileNaming</a></td>
+                }
+                else
+                {
+                    <td><a href="@student.FileData" download="@(@student.Surname+".docx")">@student.Surname</a></td>
+                }
+            }
+            else
+            {
+                <td>Пусто</td>
+            }
             <td>@student.Result</td>
         </tr>
         }

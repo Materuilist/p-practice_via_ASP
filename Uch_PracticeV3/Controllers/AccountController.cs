@@ -10,6 +10,7 @@ using System.Security.Claims;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using System.Data.Entity;
 
 namespace Uch_PracticeV3.Controllers
 {
@@ -32,6 +33,8 @@ namespace Uch_PracticeV3.Controllers
 
         public async Task<ActionResult> Login(string returnUrl)
         {
+            ViewBag.url = Request.Url.AbsolutePath;
+            ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
             ViewBag.returnUrl = returnUrl;
             return View();
         }

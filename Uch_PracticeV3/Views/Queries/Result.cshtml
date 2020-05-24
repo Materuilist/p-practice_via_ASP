@@ -1,38 +1,54 @@
 ﻿@using Uch_PracticeV3.OfficeInteraction
 @model EnterParams
 
-<div class="row justify-content-between">
-    <div class="col-md-4 col-sm-6">
-        <h2 class="text-primary my-4">@ViewBag.Title:</h2>
-    </div>
-    <div class="col-md-4 col-sm-6 d-flex flex-column justify-content-around">
-        <div class="row align-items-center">
-            <button onclick="window.location.assign(window.location.href.split('=')[0] + '=excel')" id="add-button" class="col-lg mx-2 btn btn-success">Excel</button>
-            <button onclick="window.location.assign(window.location.href.split('=')[0] + '=word')" id="edit-button" class="col-lg mx-2 btn btn-warning">Word</button>
+@if (ViewBag.isResultEmpty != null)
+{
+    <h1>Запрос не дал результатов!</h1>
+}
+else
+{
+    <div class="row justify-content-between">
+        <div class="col-md-4 col-sm-6">
+            <h2 class="text-primary my-4">@ViewBag.Title:</h2>
+        </div>
+        <div class="col-md-4 col-sm-6 d-flex flex-column justify-content-around">
+            <div class="row align-items-center">
+                @if (ViewBag.Param == null)
+                {
+                    <button onclick="window.location.assign(window.location.href.split('=')[0] + '=excel')" id="add-button" class="col-lg mx-2 btn btn-success">Excel</button>
+                    <button onclick="window.location.assign(window.location.href.split('=')[0] + '=word')" id="edit-button" class="col-lg mx-2 btn btn-warning">Word</button>
+                }
+                else
+                {
+
+                    <button onclick="window.location.assign(window.location.href.split('=')[0] + '=excel&param='+@ViewBag.Param)" id="add-button" class="col-lg mx-2 btn btn-success">Excel</button>
+                    <button onclick="window.location.assign(window.location.href.split('=')[0] + '=word&param='+@ViewBag.Param)" id="edit-button" class="col-lg mx-2 btn btn-warning">Word</button>
+                }
+            </div>
         </div>
     </div>
-</div>
-<table class="table" id="table">
-    <thead class="thead-dark">
-        <tr>
-            @foreach(string col in Model.colnames)
-            {
-                <th scope="col">@col</th>
-            }
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (List<string> row in Model.rows)
-        {
+    <table class="table" id="table">
+        <thead class="thead-dark">
             <tr>
-                @*Это всегда Id*@
-                <th scope="row">@row[0]</th>
-                @* Кроме кода *@
-                @foreach(string rowItem in row.Except(new List<string>() { row[0]}))
+                @foreach (string col in Model.colnames)
                 {
-                    <td>@rowItem</td>
+                    <th scope="col">@col</th>
                 }
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (List<string> row in Model.rows)
+            {
+                <tr>
+                    @*Это всегда Id*@
+                    <th scope="row">@row[0]</th>
+                    @* Кроме кода *@
+                    @foreach (string rowItem in row.Except(new List<string>() { row[0] }))
+                    {
+                        <td>@rowItem</td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="Uch_PracticeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+<Schema Namespace="PracticeEntities" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="Contract">
     <Key>
       <PropertyRef Name="Id" />
@@ -31,7 +31,7 @@
     <Property Name="Patronymic" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
     <Property Name="RankId" Type="Int32" Nullable="false" />
     <Property Name="Email" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
-    <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Students" Relationship="Self.FK_LeaderId_Students" FromRole="Leaders" ToRole="Students" />
     <NavigationProperty Name="Rank" Relationship="Self.FK_RankId_Leaders" FromRole="Leaders" ToRole="Ranks" />
   </EntityType>
@@ -81,6 +81,8 @@
     <Property Name="GroupId" Type="Int32" Nullable="false" />
     <Property Name="ContractId" Type="Int32" Nullable="false" />
     <Property Name="LeaderId" Type="Int32" Nullable="false" />
+    <Property Name="FileNaming" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FileData" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Result" Type="Int32" />
     <NavigationProperty Name="Contract" Relationship="Self.FK_ContractId_Students" FromRole="Students" ToRole="Contracts" />
     <NavigationProperty Name="Group" Relationship="Self.FK_GroupId_Students" FromRole="Students" ToRole="Groups" />
@@ -184,7 +186,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="UCH_PracticeEntities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="Uch_PracticeEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Contracts" EntityType="Self.Contract" />
     <EntitySet Name="Groups" EntityType="Self.Group" />
     <EntitySet Name="Leaders" EntityType="Self.Leader" />

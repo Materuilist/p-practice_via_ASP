@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="Хранилище Uch_PracticeModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="Хранилище PracticeEntities" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Contracts">
     <Key>
       <PropertyRef Name="Id" />
@@ -27,7 +27,7 @@
     <Property Name="Patronymic" Type="nvarchar" MaxLength="30" />
     <Property Name="RankId" Type="int" Nullable="false" />
     <Property Name="Email" Type="nvarchar" MaxLength="40" />
-    <Property Name="Phone" Type="nvarchar" MaxLength="15" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="11" />
   </EntityType>
   <EntityType Name="Organizations">
     <Key>
@@ -70,6 +70,8 @@
     <Property Name="GroupId" Type="int" Nullable="false" />
     <Property Name="ContractId" Type="int" Nullable="false" />
     <Property Name="LeaderId" Type="int" Nullable="false" />
+    <Property Name="FileNaming" Type="nvarchar" MaxLength="50" />
+    <Property Name="FileData" Type="nvarchar(max)" />
     <Property Name="Result" Type="int" />
   </EntityType>
   <Association Name="FK_ContractId_Students">
@@ -170,7 +172,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="Хранилище Uch_PracticeModelContainer">
+  <EntityContainer Name="Хранилище PracticeEntitiesContainer">
     <EntitySet Name="Contracts" EntityType="Self.Contracts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Leaders" EntityType="Self.Leaders" Schema="dbo" store:Type="Tables" />

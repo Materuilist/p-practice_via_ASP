@@ -10,7 +10,7 @@
             <label for="Id">Код</label>
             @if (ViewBag.Action == "edit")
             {
-                <input hidden class="form-control" name="Id" value="@ViewBag.Student.Id" />
+                <input readonly class="form-control" name="Id" value="@ViewBag.Student.Id" />
             }
             else
             {
@@ -111,6 +111,24 @@
             </select>
         </div>
         <div class="form-group">
+            <label for="FileNaming">Название файла</label>
+            @if (ViewBag.Action == "edit")
+            {
+                <input name="FileNaming" type="text" class="form-control" id="FileNaming"
+                       value="@ViewBag.Student.FileNaming">
+            }
+            else
+            {
+                <input name="FileNaming" type="text" class="form-control" id="FileNaming">
+            }
+        </div>
+        <input hidden name="FileData" type="text" id="RealFileData"/>
+        <div class="form-group">
+            <label for="FileData">Файл</label>
+            <input form="none" type="file" accept="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                       class="form-control-file" id="FileData">
+        </div>
+        <div class="form-group">
             <label for="Result">Результат</label>
             @if (ViewBag.Action == "edit")
             {
@@ -124,3 +142,15 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+
+<script>
+    $('#FileData').on('change', ({ target }) => {
+        const file = target.files[0];
+        const fr = new FileReader();
+        fr.readAsDataURL(file);
+        console.log($('#RealFileData'))
+        fr.onload = () => {
+            $('#RealFileData').val(fr.result.toString());
+        }
+    })
+</script>

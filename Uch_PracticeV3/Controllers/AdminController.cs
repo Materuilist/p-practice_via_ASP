@@ -18,7 +18,7 @@ namespace Uch_PracticeV3.Controllers
     public class AdminController : Controller
     {
         private const int ITEMS_PER_PAGE = 3;
-        private UCH_PracticeEntities db = new UCH_PracticeEntities();
+        private Uch_PracticeEntities db = new Uch_PracticeEntities();
         private ApplicationUserManager UserManager
         {
             get
@@ -36,12 +36,16 @@ namespace Uch_PracticeV3.Controllers
         [Auth]
         public ActionResult Index()
         {
+            ViewBag.url = Request.Url.AbsolutePath;
+            ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
             return View();
         }
 
         [Auth]
         public async Task<ActionResult> Contracts()
         {
+            ViewBag.url = Request.Url.AbsolutePath;
+            ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
             switch (Request.QueryString.Get("action"))
             {
                 case "edit":
@@ -121,6 +125,8 @@ namespace Uch_PracticeV3.Controllers
         [Auth]
         public async Task<ActionResult> Groups()
         {
+            ViewBag.url = Request.Url.AbsolutePath;
+            ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
             switch (Request.QueryString.Get("action"))
             {
                 case "edit":
@@ -200,6 +206,8 @@ namespace Uch_PracticeV3.Controllers
         [Auth]
         public async Task<ActionResult> Leaders()
         {
+            ViewBag.url = Request.Url.AbsolutePath;
+            ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
             switch (Request.QueryString.Get("action"))
             {
                 case "edit":
@@ -279,6 +287,8 @@ namespace Uch_PracticeV3.Controllers
         [Auth]
         public async Task<ActionResult> Organizations()
         {
+            ViewBag.url = Request.Url.AbsolutePath;
+            ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
             switch (Request.QueryString.Get("action"))
             {
                 case "edit":
@@ -359,6 +369,8 @@ namespace Uch_PracticeV3.Controllers
         [Auth]
         public async Task<ActionResult> Ranks()
         {
+            ViewBag.url = Request.Url.AbsolutePath;
+            ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
             switch (Request.QueryString.Get("action"))
             {
                 case "edit":
@@ -436,6 +448,8 @@ namespace Uch_PracticeV3.Controllers
         [Auth]
         public async Task<ActionResult> Sectors()
         {
+            ViewBag.url = Request.Url.AbsolutePath;
+            ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
             switch (Request.QueryString.Get("action"))
             {
                 case "edit":
@@ -514,6 +528,8 @@ namespace Uch_PracticeV3.Controllers
         [Auth]
         public async Task<ActionResult> Specialties()
         {
+            ViewBag.url = Request.Url.AbsolutePath;
+            ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
             switch (Request.QueryString.Get("action"))
             {
                 case "edit":
@@ -592,6 +608,8 @@ namespace Uch_PracticeV3.Controllers
         [Auth]
         public async Task<ActionResult> Students()
         {
+            ViewBag.url = Request.Url.AbsolutePath;
+            ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
             switch (Request.QueryString.Get("action"))
             {
                 case "edit":

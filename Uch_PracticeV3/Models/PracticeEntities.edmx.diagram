@@ -4,22 +4,22 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="257df5dd7688408ba4edb5dcaf6aeb87" Name="Diagram1">
-        <EntityTypeShape EntityType="Uch_PracticeModel.Contract" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Uch_PracticeModel.Group" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Uch_PracticeModel.Leader" Width="1.5" PointX="5.25" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="Uch_PracticeModel.Organization" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Uch_PracticeModel.Rank" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Uch_PracticeModel.Sector" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Uch_PracticeModel.Specialty" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Uch_PracticeModel.Student" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
-        <AssociationConnector Association="Uch_PracticeModel.FK_ContractId_Students" ManuallyRouted="false" />
-        <AssociationConnector Association="Uch_PracticeModel.FK_OrganizationId_Contracts" ManuallyRouted="false" />
-        <AssociationConnector Association="Uch_PracticeModel.FK_GroupId_Students" ManuallyRouted="false" />
-        <AssociationConnector Association="Uch_PracticeModel.FK_SpecialtyId_Groups" ManuallyRouted="false" />
-        <AssociationConnector Association="Uch_PracticeModel.FK_LeaderId_Students" ManuallyRouted="false" />
-        <AssociationConnector Association="Uch_PracticeModel.FK_RankId_Leaders" ManuallyRouted="false" />
-        <AssociationConnector Association="Uch_PracticeModel.FK_SectorId_Organizations" ManuallyRouted="false" />
+      <Diagram DiagramId="a7e0074f36f74bd099ca9da493a57676" Name="Diagram1">
+        <EntityTypeShape EntityType="PracticeEntities.Contract" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PracticeEntities.Group" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PracticeEntities.Leader" Width="1.5" PointX="5.25" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PracticeEntities.Organization" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PracticeEntities.Rank" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PracticeEntities.Sector" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="PracticeEntities.Specialty" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PracticeEntities.Student" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="PracticeEntities.FK_ContractId_Students" ManuallyRouted="false" />
+        <AssociationConnector Association="PracticeEntities.FK_OrganizationId_Contracts" ManuallyRouted="false" />
+        <AssociationConnector Association="PracticeEntities.FK_GroupId_Students" ManuallyRouted="false" />
+        <AssociationConnector Association="PracticeEntities.FK_SpecialtyId_Groups" ManuallyRouted="false" />
+        <AssociationConnector Association="PracticeEntities.FK_LeaderId_Students" ManuallyRouted="false" />
+        <AssociationConnector Association="PracticeEntities.FK_RankId_Leaders" ManuallyRouted="false" />
+        <AssociationConnector Association="PracticeEntities.FK_SectorId_Organizations" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

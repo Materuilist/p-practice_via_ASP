@@ -13,10 +13,10 @@ namespace Uch_PracticeV3.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class UCH_PracticeEntities : DbContext
+    public partial class Uch_PracticeEntities : DbContext
     {
-        public UCH_PracticeEntities()
-            : base("name=UCH_PracticeEntities")
+        public Uch_PracticeEntities()
+            : base("name=Uch_PracticeEntities")
         {
         }
     

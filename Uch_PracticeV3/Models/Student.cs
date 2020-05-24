@@ -21,6 +21,8 @@ namespace Uch_PracticeV3.Models
         public int GroupId { get; set; }
         public int ContractId { get; set; }
         public int LeaderId { get; set; }
+        public string FileNaming { get; set; }
+        public string FileData { get; set; }
         public Nullable<int> Result { get; set; }
     
         public virtual Contract Contract { get; set; }

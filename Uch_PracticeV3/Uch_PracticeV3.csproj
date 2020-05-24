@@ -368,6 +368,7 @@
     <Content Include="Views\Admin\ModifyStudent.cshtml" />
     <Content Include="Views\Queries\Index.cshtml" />
     <Content Include="Views\Queries\Result.cshtml" />
+    <Content Include="Views\Queries\StudentsWithFiles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
