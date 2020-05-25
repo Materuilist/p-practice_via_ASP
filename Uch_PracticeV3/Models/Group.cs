@@ -11,7 +11,9 @@ namespace Uch_PracticeV3.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Group
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,7 +23,16 @@ namespace Uch_PracticeV3.Models
         }
     
         public int Id { get; set; }
+
+        [Display(Name ="Название")]
+        [Required]
+        [MaxLength(9)]
+        [Index(IsUnique =true)]
         public string Naming { get; set; }
+
+        [Display(Name = "Код специальности")]
+        [MaxLength(8)]
+        [Required]
         public string SpecialtyId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

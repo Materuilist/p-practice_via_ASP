@@ -1,34 +1,31 @@
 ﻿@using Uch_PracticeV3.Models
 @model Group
-@{
-    ViewBag.Title = ViewBag.Action;
-}
 
-<form action="/Admin/Groups/@ViewBag.Action" method="post">
+<form action="/Admin/Groups/@ViewBag.Action" method="post" class="my-3">
     @if (ViewBag.Action == "edit")
     {
-        <input hidden name="Id" value="@ViewBag.Group.Id" />
+        <input hidden name="Id" value="@Model.Id" />
     }
     <div class="form-group">
         <label for="Naming">Название</label>
         @if (ViewBag.Action == "edit")
         {
-            <input name="Naming" type="text" class="form-control" id="Naming"
-                   value="@ViewBag.Group.Naming">
+            <input name="Naming" required maxlength="9" type="text" class="form-control" id="Naming"
+                   value="@Model.Naming">
         }
         else
         {
-            <input name="Naming" type="text" class="form-control" id="Naming">
+            <input required maxlength="9" name="Naming" type="text" class="form-control" id="Naming">
         }
     </div>
     <div class="form-group">
         <label for="SpecialtyId">Направление подготовки</label>
-        <select class="form-control" name="SpecialtyId" id="SpecialtyId">
+        <select class="form-control" required name="SpecialtyId" id="SpecialtyId">
             @foreach (Specialty spec in ViewBag.Specialties)
             {
                 if (ViewBag.Action == "edit")
                 {
-                    <option selected="@(spec.Id == @ViewBag.Group.SpecialtyId)" data-toggle="tooltip"
+                    <option selected="@(spec.Id == @Model.SpecialtyId)" data-toggle="tooltip"
                             data-placement="right" title="@spec.Educational_Program">
                         @spec.Id
                     </option>

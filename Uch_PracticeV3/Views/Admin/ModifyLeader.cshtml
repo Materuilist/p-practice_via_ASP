@@ -1,92 +1,89 @@
 ﻿@using Uch_PracticeV3.Models
 @model Leader
-@{
-    ViewBag.Title = ViewBag.Action;
-}
 
-    <form action="/Admin/Leaders/@ViewBag.Action" method="post">
+<form action="/Admin/Leaders/@ViewBag.Action" method="post" class="my-3">
+    @if (ViewBag.Action == "edit")
+    {
+        <input hidden name="Id" value="@Model.Id" />
+    }
+    <div class="form-group">
+        <label for="Surname">Фамилия</label>
         @if (ViewBag.Action == "edit")
         {
-            <input hidden name="Id" value="@ViewBag.Leader.Id" />
+            <input required maxlength="30" name="Surname" type="text" class="form-control" id="Surname"
+                    value="@Model.Surname">
         }
-        <div class="form-group">
-            <label for="Surname">Фамилия</label>
-            @if (ViewBag.Action == "edit")
+        else
+        {
+            <input required maxlength="30" name="Surname" type="text" class="form-control" id="Surname">
+        }
+    </div>
+    <div class="form-group">
+        <label for="Name">Имя</label>
+        @if (ViewBag.Action == "edit")
+        {
+            <input required maxlength="30" name="Name" type="text" class="form-control" id="Name"
+                    value="@Model.Name">
+        }
+        else
+        {
+            <input required maxlength="30" name="Name" type="text" class="form-control" id="Name">
+        }
+    </div>
+    <div class="form-group">
+        <label for="Patronymic">Отчество</label>
+        @if (ViewBag.Action == "edit")
+        {
+            <input name="Patronymic" maxlength="30" type="text" class="form-control" id="Patronymic"
+                    value="@Model.Patronymic">
+        }
+        else
+        {
+            <input name="Patronymic" maxlength="30" type="text" class="form-control" id="Patronymic">
+        }
+    </div>
+    <div class="form-group">
+        <label for="RankId">Должность</label>
+        <select class="form-control" name="RankId" id="RankId">
+            @foreach (Rank rank in ViewBag.Ranks)
             {
-                <input name="Surname" type="text" class="form-control" id="Surname"
-                       value="@ViewBag.Leader.Surname">
-            }
-            else
-            {
-                <input name="Surname" type="text" class="form-control" id="Surname">
-            }
-        </div>
-        <div class="form-group">
-            <label for="Name">Имя</label>
-            @if (ViewBag.Action == "edit")
-            {
-                <input name="Name" type="text" class="form-control" id="Name"
-                       value="@ViewBag.Leader.Name">
-            }
-            else
-            {
-                <input name="Name" type="text" class="form-control" id="Name">
-            }
-        </div>
-        <div class="form-group">
-            <label for="Patronymic">Отчество</label>
-            @if (ViewBag.Action == "edit")
-            {
-                <input name="Patronymic" type="text" class="form-control" id="Patronymic"
-                       value="@ViewBag.Leader.Patronymic">
-            }
-            else
-            {
-                <input name="Patronymic" type="text" class="form-control" id="Patronymic">
-            }
-        </div>
-        <div class="form-group">
-            <label for="RankId">Должность</label>
-            <select class="form-control" name="RankId" id="RankId">
-                @foreach (Rank rank in ViewBag.Ranks)
+                if (ViewBag.Action == "edit")
                 {
-                    if (ViewBag.Action == "edit")
-                    {
-                        <option selected="@(rank.Id == @ViewBag.Leader.RankId)" data-toggle="tooltip"
-                                data-placement="right" title="@rank.Naming">
-                            @rank.Id
-                        </option>
-                    }
-                    else
-                    {
-                        <option data-toggle="tooltip" data-placement="right" title="@rank.Naming">@rank.Id</option>
-                    }
+                    <option selected="@(rank.Id == @Model.RankId)" data-toggle="tooltip"
+                            data-placement="right" title="@rank.Naming">
+                        @rank.Id
+                    </option>
                 }
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="Email">Email</label>
-            @if (ViewBag.Action == "edit")
-            {
-                <input name="Email" type="email" class="form-control" id="Email"
-                       value="@ViewBag.Leader.Email">
+                else
+                {
+                    <option data-toggle="tooltip" data-placement="right" title="@rank.Naming">@rank.Id</option>
+                }
             }
-            else
-            {
-                <input name="Email" type="email" class="form-control" id="Email">
-            }
-        </div>
-        <div class="form-group">
-            <label for="Phone">Телефон</label>
-            @if (ViewBag.Action == "edit")
-            {
-                <input name="Phone" type="tel" class="form-control" id="Phone"
-                       value="@ViewBag.Leader.Phone">
-            }
-            else
-            {
-                <input name="Phone" type="tel" class="form-control" id="Phone">
-            }
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="Email">Email</label>
+        @if (ViewBag.Action == "edit")
+        {
+            <input name="Email" maxlength="40" type="email" class="form-control" id="Email"
+                    value="@Model.Email">
+        }
+        else
+        {
+            <input name="Email" maxlength="40" type="email" class="form-control" id="Email">
+        }
+    </div>
+    <div class="form-group">
+        <label for="Phone">Телефон</label>
+        @if (ViewBag.Action == "edit")
+        {
+            <input name="Phone" type="tel" class="form-control" id="Phone"
+                    value="@Model.Phone">
+        }
+        else
+        {
+            <input name="Phone" type="tel" class="form-control" id="Phone">
+        }
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

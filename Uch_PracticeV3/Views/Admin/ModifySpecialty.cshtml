@@ -1,32 +1,29 @@
 ﻿@using Uch_PracticeV3.Models
 @model Specialty
-@{
-    ViewBag.Title = ViewBag.Action;
-}
 
-    <form action="/Admin/Specialties/@ViewBag.Action" method="post">
-        <div class="form-group">
-            <label for="Id">Код</label>
-            @if (ViewBag.Action == "edit")
-            {
-                <input hidden class="form-control" name="Id" value="@ViewBag.Specialty.Id" />
-            }
-            else
-            {
-                <input name="Id" class="form-control" />
-            }
-        </div>
-        <div class="form-group">
-            <label for="Educational_Program">Направление подготовки</label>
-            @if (ViewBag.Action == "edit")
-            {
-                <input name="Educational_Program" type="text" class="form-control" id="Educational_Program"
-                       value="@ViewBag.Specialty.Educational_Program">
-            }
-            else
-            {
-                <input name="Educational_Program" type="text" class="form-control" id="Educational_Program">
-            }
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+<form action="/Admin/Specialties/@ViewBag.Action" method="post" class="my-3">
+    <div class="form-group">
+        <label for="Id">Код</label>
+        @if (ViewBag.Action == "edit")
+        {
+            <input hidden class="form-control" name="Id" value="@Model.Id" />
+        }
+        else
+        {
+            <input name="Id" required maxlength="8" class="form-control" />
+        }
+    </div>
+    <div class="form-group">
+        <label for="Educational_Program">Направление подготовки</label>
+        @if (ViewBag.Action == "edit")
+        {
+            <input name="Educational_Program" maxlength="70" type="text" class="form-control" id="Educational_Program"
+                    value="@Model.Educational_Program">
+        }
+        else
+        {
+            <input name="Educational_Program" maxlength="70" type="text" class="form-control" id="Educational_Program">
+        }
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

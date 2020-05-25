@@ -11,7 +11,8 @@ namespace Uch_PracticeV3.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Specialty
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,8 +20,14 @@ namespace Uch_PracticeV3.Models
         {
             this.Groups = new HashSet<Group>();
         }
-    
+
+        [Display(Name = "Код")]
+        [Required]
+        [StringLength(10)]
         public string Id { get; set; }
+
+        [Display(Name = "Образовательная программа")]
+        [MaxLength(70)]
         public string Educational_Program { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

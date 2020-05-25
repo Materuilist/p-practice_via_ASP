@@ -11,7 +11,8 @@ namespace Uch_PracticeV3.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Contract
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,9 +21,20 @@ namespace Uch_PracticeV3.Models
             this.Students = new HashSet<Student>();
         }
     
+        [Display(Name = "Код")]
+        [Required]
         public int Id { get; set; }
+
+        [Display(Name = "Код организации")]
+        [StringLength(8)]
+        [Required]
         public string OrganizationId { get; set; }
+
+        [Display(Name = "Дата заключения")]
+        [Required]
         public System.DateTime Enter_Date { get; set; }
+
+        [Display(Name = "Дата расторжения")]
         public Nullable<System.DateTime> Termination_Date { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

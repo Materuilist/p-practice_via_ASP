@@ -1,63 +1,60 @@
 ﻿@using Uch_PracticeV3.Models
 @model Organization
-@{
-    ViewBag.Title = ViewBag.Action;
-}
 
-    <form action="/Admin/Organizations/@ViewBag.Action" method="post">
-        <div class="form-group">
-            <label for="Id">Код</label>
-            @if (ViewBag.Action == "edit")
+<form action="/Admin/Organizations/@ViewBag.Action" method="post" class="my-3">
+    <div class="form-group">
+        <label for="Id">Код</label>
+        @if (ViewBag.Action == "edit")
+        {
+            <input hidden class="form-control" name="Id" value="@Model.Id" />
+        }
+        else
+        {
+            <input name="Id" maxlength="8" required class="form-control" />
+        }
+    </div>
+    <div class="form-group">
+        <label for="ShortNaming">Короткое название</label>
+        @if (ViewBag.Action == "edit")
+        {
+            <input name="ShortNaming" maxlength="20" type="text" class="form-control" id="ShortNaming"
+                    value="@Model.ShortNaming">
+        }
+        else
+        {
+            <input name="ShortNaming" maxlength="20" type="text" class="form-control" id="ShortNaming">
+        }
+    </div>
+    <div class="form-group">
+        <label for="FullNaming">Полное название</label>
+        @if (ViewBag.Action == "edit")
+        {
+            <input name="FullNaming" maxlength="30" required type="text" class="form-control" id="FullNaming"
+                    value="@Model.FullNaming">
+        }
+        else
+        {
+            <input name="FullNaming" maxlength="30" required type="text" class="form-control" id="FullNaming">
+        }
+    </div>
+    <div class="form-group">
+        <label for="SectorId">Отрасль</label>
+        <select class="form-control" name="SectorId" id="SectorId">
+            @foreach (Sector sector in ViewBag.Sectors)
             {
-                <input hidden class="form-control" name="Id" value="@ViewBag.Organization.Id" />
-            }
-            else
-            {
-                <input name="Id" class="form-control" />
-            }
-        </div>
-        <div class="form-group">
-            <label for="ShortNaming">Короткое название</label>
-            @if (ViewBag.Action == "edit")
-            {
-                <input name="ShortNaming" type="text" class="form-control" id="ShortNaming"
-                       value="@ViewBag.Organization.ShortNaming">
-            }
-            else
-            {
-                <input name="ShortNaming" type="text" class="form-control" id="ShortNaming">
-            }
-        </div>
-        <div class="form-group">
-            <label for="FullNaming">Полное название</label>
-            @if (ViewBag.Action == "edit")
-            {
-                <input name="FullNaming" type="text" class="form-control" id="FullNaming"
-                       value="@ViewBag.Organization.FullNaming">
-            }
-            else
-            {
-                <input name="FullNaming" type="text" class="form-control" id="FullNaming">
-            }
-        </div>
-        <div class="form-group">
-            <label for="SectorId">Отрасль</label>
-            <select class="form-control" name="SectorId" id="SectorId">
-                @foreach (Sector sector in ViewBag.Sectors)
+                if (ViewBag.Action == "edit")
                 {
-                    if (ViewBag.Action == "edit")
-                    {
-                        <option selected="@(sector.Id == @ViewBag.Organization.SectorId)" data-toggle="tooltip"
-                                data-placement="right" title="@sector.Naming">
-                            @sector.Id
-                        </option>
-                    }
-                    else
-                    {
-                        <option data-toggle="tooltip" data-placement="right" title="@sector.Naming">@sector.Id</option>
-                    }
+                    <option selected="@(sector.Id == @Model.SectorId)" data-toggle="tooltip"
+                            data-placement="right" title="@sector.Naming">
+                        @sector.Id
+                    </option>
                 }
-            </select>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+                else
+                {
+                    <option data-toggle="tooltip" data-placement="right" title="@sector.Naming">@sector.Id</option>
+                }
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

@@ -11,7 +11,8 @@ namespace Uch_PracticeV3.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Organization
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,9 +21,20 @@ namespace Uch_PracticeV3.Models
             this.Contracts = new HashSet<Contract>();
         }
     
+        [Display(Name ="ОКПО")]
+        [Required]
+        [StringLength(8)]
         public string Id { get; set; }
+        [Display(Name = "Краткое название")]
+        [MaxLength(20)]
         public string ShortNaming { get; set; }
+        [Display(Name = "Полное название")]
+        [Required]
+        [MaxLength(30)]
         public string FullNaming { get; set; }
+        [Display(Name = "Код отрасли")]
+        [Required]
+        [MaxLength(10)]
         public string SectorId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -44,6 +44,7 @@ namespace Uch_PracticeV3.Controllers
         [Auth]
         public async Task<ActionResult> Contracts()
         {
+            ViewBag.Title = "Договоры";
             ViewBag.url = Request.Url.AbsolutePath;
             ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
             switch (Request.QueryString.Get("action"))
@@ -55,8 +56,7 @@ namespace Uch_PracticeV3.Controllers
                             : 1;
                         ViewBag.Action = "edit";
                         ViewBag.Organizations = await db.Organizations.ToListAsync();
-                        ViewBag.Contract = await db.Contracts.FindAsync(rowId);
-                        return View("ModifyContract");
+                        return View("ModifyContract", await db.Contracts.FindAsync(rowId));
                     }
                 case "add":
                     {
@@ -100,6 +100,20 @@ namespace Uch_PracticeV3.Controllers
         [Route("Admin/Contracts/{operation}")]
         public async Task<ActionResult> Contracts(string operation, Contract contract)
         {
+            if (contract.Enter_Date>contract.Termination_Date)
+            {
+                ModelState.AddModelError("", "Год заключения договора не должен быть больше года его окончания");
+            }
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Title = "Контракты";
+                ViewBag.url = Request.Url.AbsolutePath;
+                ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
+                ViewBag.Action = operation;
+                ViewBag.Errors = ModelState.Values.Select(ms => ms.Errors.FirstOrDefault()).Where(error => error != null);
+                ViewBag.Organizations = await db.Organizations.ToListAsync();
+                return View("ModifyContract", contract);
+            }
             switch (operation)
             {
                 case "edit":
@@ -125,6 +139,7 @@ namespace Uch_PracticeV3.Controllers
         [Auth]
         public async Task<ActionResult> Groups()
         {
+            ViewBag.Title = "Группы";
             ViewBag.url = Request.Url.AbsolutePath;
             ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
             switch (Request.QueryString.Get("action"))
@@ -136,8 +151,7 @@ namespace Uch_PracticeV3.Controllers
                             : 1;
                         ViewBag.Action = "edit";
                         ViewBag.Specialties = await db.Specialties.ToListAsync();
-                        ViewBag.Group = await db.Groups.FindAsync(rowId);
-                        return View("ModifyGroup");
+                        return View("ModifyGroup", await db.Groups.FindAsync(rowId));
                     }
                 case "add":
                     {
@@ -181,6 +195,16 @@ namespace Uch_PracticeV3.Controllers
         [Route("Admin/Groups/{operation}")]
         public async Task<ActionResult> Groups(string operation, Group group)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Title = "Группы";
+                ViewBag.url = Request.Url.AbsolutePath;
+                ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
+                ViewBag.Action = operation;
+                ViewBag.Errors = ModelState.Values.Select(ms => ms.Errors.FirstOrDefault()).Where(error=>error!=null);
+                ViewBag.Specialties = await db.Specialties.ToListAsync();
+                return View("ModifyGroup", group);
+            }
             switch (operation)
             {
                 case "edit":
@@ -206,6 +230,7 @@ namespace Uch_PracticeV3.Controllers
         [Auth]
         public async Task<ActionResult> Leaders()
         {
+            ViewBag.Title = "Руководители";
             ViewBag.url = Request.Url.AbsolutePath;
             ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
             switch (Request.QueryString.Get("action"))
@@ -217,8 +242,7 @@ namespace Uch_PracticeV3.Controllers
                             : 1;
                         ViewBag.Action = "edit";
                         ViewBag.Ranks = await db.Ranks.ToListAsync();
-                        ViewBag.Leader = await db.Leaders.FindAsync(rowId);
-                        return View("ModifyLeader");
+                        return View("ModifyLeader", await db.Leaders.FindAsync(rowId));
                     }
                 case "add":
                     {
@@ -262,6 +286,17 @@ namespace Uch_PracticeV3.Controllers
         [Route("Admin/Leaders/{operation}")]
         public async Task<ActionResult> Leaders(string operation, Leader leader)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Title = "Руководители";
+                ViewBag.url = Request.Url.AbsolutePath;
+                ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
+                ViewBag.Action = operation;
+                ViewBag.Errors = ModelState.Values.Select(ms => ms.Errors.FirstOrDefault())
+                    .Where(error => error != null);
+                ViewBag.Ranks = await db.Ranks.ToListAsync();
+                return View("ModifyLeader", leader);
+            }
             switch (operation)
             {
                 case "edit":
@@ -287,6 +322,7 @@ namespace Uch_PracticeV3.Controllers
         [Auth]
         public async Task<ActionResult> Organizations()
         {
+            ViewBag.Title = "Организации";
             ViewBag.url = Request.Url.AbsolutePath;
             ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
             switch (Request.QueryString.Get("action"))
@@ -300,8 +336,7 @@ namespace Uch_PracticeV3.Controllers
                         }
                         ViewBag.Action = "edit";
                         ViewBag.Sectors = await db.Sectors.ToListAsync();
-                        ViewBag.Organization = await db.Organizations.FindAsync(rowId);
-                        return View("ModifyOrganization");
+                        return View("ModifyOrganization", await db.Organizations.FindAsync(rowId));
                     }
                 case "add":
                     {
@@ -344,6 +379,17 @@ namespace Uch_PracticeV3.Controllers
         [Route("Admin/Organizations/{operation}")]
         public async Task<ActionResult> Organizations(string operation, Organization organization)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Title = "Организации";
+                ViewBag.url = Request.Url.AbsolutePath;
+                ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
+                ViewBag.Action = operation;
+                ViewBag.Errors = ModelState.Values.Select(ms => ms.Errors.FirstOrDefault())
+                    .Where(error => error != null);
+                ViewBag.Sectors = await db.Sectors.ToListAsync();
+                return View("ModifyOrganization", organization);
+            }
             switch (operation)
             {
                 case "edit":
@@ -369,6 +415,7 @@ namespace Uch_PracticeV3.Controllers
         [Auth]
         public async Task<ActionResult> Ranks()
         {
+            ViewBag.Title = "Должности";
             ViewBag.url = Request.Url.AbsolutePath;
             ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
             switch (Request.QueryString.Get("action"))
@@ -379,8 +426,7 @@ namespace Uch_PracticeV3.Controllers
                             Request.QueryString.Get("rowId"))
                             : 1;
                         ViewBag.Action = "edit";
-                        ViewBag.Rank = await db.Ranks.FindAsync(rowId);
-                        return View("ModifyRank");
+                        return View("ModifyRank", await db.Ranks.FindAsync(rowId));
                     }
                 case "add":
                     {
@@ -423,6 +469,16 @@ namespace Uch_PracticeV3.Controllers
         [Route("Admin/Ranks/{operation}")]
         public async Task<ActionResult> Ranks(string operation, Rank rank)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Title = "Должности";
+                ViewBag.url = Request.Url.AbsolutePath;
+                ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
+                ViewBag.Action = operation;
+                ViewBag.Errors = ModelState.Values.Select(ms => ms.Errors.FirstOrDefault())
+                    .Where(error => error != null);
+                return View("ModifyRank", rank);
+            }
             switch (operation)
             {
                 case "edit":
@@ -448,6 +504,7 @@ namespace Uch_PracticeV3.Controllers
         [Auth]
         public async Task<ActionResult> Sectors()
         {
+            ViewBag.Title = "Отрасли";
             ViewBag.url = Request.Url.AbsolutePath;
             ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
             switch (Request.QueryString.Get("action"))
@@ -460,8 +517,7 @@ namespace Uch_PracticeV3.Controllers
                             return Redirect("/");
                         }
                         ViewBag.Action = "edit";
-                        ViewBag.Sector = await db.Sectors.FindAsync(rowId);
-                        return View("ModifySector");
+                        return View("ModifySector", await db.Sectors.FindAsync(rowId));
                     }
                 case "add":
                     {
@@ -503,6 +559,16 @@ namespace Uch_PracticeV3.Controllers
         [Route("Admin/Sectors/{operation}")]
         public async Task<ActionResult> Sectors(string operation, Sector sector)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Title = "Отрасли";
+                ViewBag.url = Request.Url.AbsolutePath;
+                ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
+                ViewBag.Action = operation;
+                ViewBag.Errors = ModelState.Values.Select(ms => ms.Errors.FirstOrDefault())
+                    .Where(error => error != null);
+                return View("ModifySector", sector);
+            }
             switch (operation)
             {
                 case "edit":
@@ -528,6 +594,7 @@ namespace Uch_PracticeV3.Controllers
         [Auth]
         public async Task<ActionResult> Specialties()
         {
+            ViewBag.Title = "Специальности";
             ViewBag.url = Request.Url.AbsolutePath;
             ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
             switch (Request.QueryString.Get("action"))
@@ -540,8 +607,7 @@ namespace Uch_PracticeV3.Controllers
                             return Redirect("/");
                         }
                         ViewBag.Action = "edit";
-                        ViewBag.Specialty = await db.Specialties.FindAsync(rowId);
-                        return View("ModifySpecialty");
+                        return View("ModifySpecialty", await db.Specialties.FindAsync(rowId));
                     }
                 case "add":
                     {
@@ -583,6 +649,16 @@ namespace Uch_PracticeV3.Controllers
         [Route("Admin/Specialties/{operation}")]
         public async Task<ActionResult> Specialties(string operation, Specialty specialty)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Title = "Специальности";
+                ViewBag.url = Request.Url.AbsolutePath;
+                ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
+                ViewBag.Action = operation;
+                ViewBag.Errors = ModelState.Values.Select(ms => ms.Errors.FirstOrDefault())
+                    .Where(error => error != null);
+                return View("ModifySpecialty", specialty);
+            }
             switch (operation)
             {
                 case "edit":
@@ -608,6 +684,7 @@ namespace Uch_PracticeV3.Controllers
         [Auth]
         public async Task<ActionResult> Students()
         {
+            ViewBag.Title = "Студенты";
             ViewBag.url = Request.Url.AbsolutePath;
             ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
             switch (Request.QueryString.Get("action"))
@@ -623,8 +700,7 @@ namespace Uch_PracticeV3.Controllers
                         ViewBag.Groups = await db.Groups.ToListAsync();
                         ViewBag.Contracts = await db.Contracts.ToListAsync();
                         ViewBag.Leaders = await db.Leaders.ToListAsync();
-                        ViewBag.Student = await db.Students.FindAsync(rowId);
-                        return View("ModifyStudent");
+                        return View("ModifyStudent", await db.Students.FindAsync(rowId));
                     }
                 case "add":
                     {
@@ -669,6 +745,19 @@ namespace Uch_PracticeV3.Controllers
         [Route("Admin/Students/{operation}")]
         public async Task<ActionResult> Students(string operation, Student student)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Title = "Студенты";
+                ViewBag.url = Request.Url.AbsolutePath;
+                ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
+                ViewBag.Action = operation;
+                ViewBag.Errors = ModelState.Values.Select(ms => ms.Errors.FirstOrDefault())
+                    .Where(error => error != null);
+                ViewBag.Groups = await db.Groups.ToListAsync();
+                ViewBag.Contracts = await db.Contracts.ToListAsync();
+                ViewBag.Leaders = await db.Leaders.ToListAsync();
+                return View("ModifyStudent", student);
+            }
             switch (operation)
             {
                 case "edit":

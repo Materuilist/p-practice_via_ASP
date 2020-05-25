@@ -11,7 +11,9 @@ namespace Uch_PracticeV3.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Leader
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,13 +21,29 @@ namespace Uch_PracticeV3.Models
         {
             this.Students = new HashSet<Student>();
         }
-    
+        
+        [Display(Name="Код")]
         public int Id { get; set; }
+        [Display(Name = "Фамилия")]
+        [MaxLength(30)]
+        [Required]
         public string Surname { get; set; }
+        [Display(Name = "Имя")]
+        [MaxLength(30)]
+        [Required]
         public string Name { get; set; }
+        [Display(Name = "Отчество")]
+        [MaxLength(30)]
         public string Patronymic { get; set; }
+        [Display(Name = "Код должности")]
+        [Required]
         public int RankId { get; set; }
+        [Display(Name = "Email")]
+        [MaxLength(40)]
         public string Email { get; set; }
+        [Display(Name = "Телефон")]
+        [Index(IsUnique = true)]
+        [StringLength(11)]
         public string Phone { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

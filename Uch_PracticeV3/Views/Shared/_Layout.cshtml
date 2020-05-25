@@ -41,6 +41,18 @@
         </div>
     </nav>
     <div class="container body-content">
+        @if (ViewBag.Errors != null)
+        {
+            foreach (ModelError error in ViewBag.Errors)
+            {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Ошибка!</strong> @error.ErrorMessage
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            }
+        }
         @RenderBody()
         <hr />
         <footer>
