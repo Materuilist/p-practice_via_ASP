@@ -193,8 +193,13 @@ namespace Uch_PracticeV3.Controllers
         [Auth]
         [HttpPost]
         [Route("Admin/Groups/{operation}")]
-        public async Task<ActionResult> Groups(string operation, Group group)
+        public async Task<ActionResult> Groups(string operation, Group _group)
         {
+            if ((from gr in db.Groups where gr.Naming == _group.Naming select gr)
+                   .FirstOrDefault() != null)
+            {
+                ModelState.AddModelError("", "Группа с таким названием уже есть");
+            }
             if (!ModelState.IsValid)
             {
                 ViewBag.Title = "Группы";
@@ -203,19 +208,19 @@ namespace Uch_PracticeV3.Controllers
                 ViewBag.Action = operation;
                 ViewBag.Errors = ModelState.Values.Select(ms => ms.Errors.FirstOrDefault()).Where(error=>error!=null);
                 ViewBag.Specialties = await db.Specialties.ToListAsync();
-                return View("ModifyGroup", group);
+                return View("ModifyGroup", _group);
             }
             switch (operation)
             {
                 case "edit":
                     {
-                        db.Entry(group).State = EntityState.Modified;
+                        db.Entry(_group).State = EntityState.Modified;
                         await db.SaveChangesAsync();
                         break;
                     }
                 case "add":
                     {
-                        db.Entry(group).State = EntityState.Added;
+                        db.Entry(_group).State = EntityState.Added;
                         await db.SaveChangesAsync();
                         break;
                     }
@@ -286,6 +291,17 @@ namespace Uch_PracticeV3.Controllers
         [Route("Admin/Leaders/{operation}")]
         public async Task<ActionResult> Leaders(string operation, Leader leader)
         {
+            //email не уникален
+            if ((from lead in db.Leaders where lead.Email == leader.Email select lead)
+                .FirstOrDefault() != null)
+            {
+                ModelState.AddModelError("", "Руководитель с таким Email уже есть");
+            }
+            if ((from lead in db.Leaders where lead.Phone == leader.Phone select lead)
+                .FirstOrDefault() != null)
+            {
+                ModelState.AddModelError("", "Руководитель с таким телефоном уже есть");
+            }
             if (!ModelState.IsValid)
             {
                 ViewBag.Title = "Руководители";
@@ -379,6 +395,11 @@ namespace Uch_PracticeV3.Controllers
         [Route("Admin/Organizations/{operation}")]
         public async Task<ActionResult> Organizations(string operation, Organization organization)
         {
+            if ((from org in db.Organizations where org.FullNaming == organization.FullNaming select org)
+                   .FirstOrDefault() != null)
+            {
+                ModelState.AddModelError("", "Организация с таким полным названием уже есть");
+            }
             if (!ModelState.IsValid)
             {
                 ViewBag.Title = "Организации";
@@ -469,6 +490,11 @@ namespace Uch_PracticeV3.Controllers
         [Route("Admin/Ranks/{operation}")]
         public async Task<ActionResult> Ranks(string operation, Rank rank)
         {
+            if ((from r in db.Ranks where r.Naming == rank.Naming select r)
+                   .FirstOrDefault() != null)
+            {
+                ModelState.AddModelError("", "Должность с таким названием уже есть");
+            }
             if (!ModelState.IsValid)
             {
                 ViewBag.Title = "Должности";
@@ -559,6 +585,11 @@ namespace Uch_PracticeV3.Controllers
         [Route("Admin/Sectors/{operation}")]
         public async Task<ActionResult> Sectors(string operation, Sector sector)
         {
+            if ((from sect in db.Sectors where sect.Naming == sector.Naming select sect)
+                   .FirstOrDefault() != null)
+            {
+                ModelState.AddModelError("", "Отрасль с таким названием уже есть");
+            }
             if (!ModelState.IsValid)
             {
                 ViewBag.Title = "Отрасли";
@@ -649,6 +680,12 @@ namespace Uch_PracticeV3.Controllers
         [Route("Admin/Specialties/{operation}")]
         public async Task<ActionResult> Specialties(string operation, Specialty specialty)
         {
+            if ((from spec in db.Specialties where spec.Educational_Program == specialty.Educational_Program select
+                 spec)
+                   .FirstOrDefault() != null)
+            {
+                ModelState.AddModelError("", "Образовательная программа должна быть уникальной");
+            }
             if (!ModelState.IsValid)
             {
                 ViewBag.Title = "Специальности";

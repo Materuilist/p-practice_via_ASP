@@ -13,8 +13,9 @@ namespace Uch_PracticeV3.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Text.RegularExpressions;
 
-    public partial class Leader
+    public partial class Leader:IValidatableObject
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Leader()
@@ -49,5 +50,21 @@ namespace Uch_PracticeV3.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Student> Students { get; set; }
         public virtual Rank Rank { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            List<ValidationResult> errors = new List<ValidationResult>();
+            
+            if(new Regex(@"^[A-Za-z]+@mail.ru$").Matches(this.Email).Count <= 0)
+            {
+                errors.Add(new ValidationResult("Email не соответствует шаблону"));
+            }
+            if (new Regex(@"^89\d{9}$").Matches(this.Phone).Count <= 0)
+            {
+                errors.Add(new ValidationResult("Телефон не соответствует шаблону"));
+            }
+
+            return errors;
+        }
     }
 }

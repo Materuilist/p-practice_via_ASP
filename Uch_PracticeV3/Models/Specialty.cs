@@ -12,8 +12,9 @@ namespace Uch_PracticeV3.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Text.RegularExpressions;
 
-    public partial class Specialty
+    public partial class Specialty:IValidatableObject
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Specialty()
@@ -32,5 +33,17 @@ namespace Uch_PracticeV3.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Group> Groups { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            List<ValidationResult> errors = new List<ValidationResult>();
+
+            if (new Regex(@"^\d{2}.\d{2}.\d{2}$").Matches(this.Id).Count <= 0)
+            {
+                errors.Add(new ValidationResult("Код не соответствует шаблону"));
+            }
+
+            return errors;
+        }
     }
 }

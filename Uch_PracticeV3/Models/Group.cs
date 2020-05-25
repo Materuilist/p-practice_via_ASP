@@ -13,8 +13,9 @@ namespace Uch_PracticeV3.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Text.RegularExpressions;
 
-    public partial class Group
+    public partial class Group:IValidatableObject
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Group()
@@ -38,5 +39,17 @@ namespace Uch_PracticeV3.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Student> Students { get; set; }
         public virtual Specialty Specialty { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            List<ValidationResult> errors = new List<ValidationResult>();
+
+            if (new Regex(@"^[А-Я]+-\d{2}-\d$").Matches(this.Naming).Count <= 0)
+            {
+                errors.Add(new ValidationResult("Название не соответствует шаблону"));
+            }
+
+            return errors;
+        }
     }
 }

@@ -12,8 +12,9 @@ namespace Uch_PracticeV3.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Text.RegularExpressions;
 
-    public partial class Contract
+    public partial class Contract:IValidatableObject
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Contract()
@@ -40,5 +41,17 @@ namespace Uch_PracticeV3.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Student> Students { get; set; }
         public virtual Organization Organization { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            List<ValidationResult> errors = new List<ValidationResult>();
+
+            if (new Regex(@"^\d{8}$").Matches(this.OrganizationId).Count <= 0)
+            {
+                errors.Add(new ValidationResult("Код ОКПО организации не соответствует шаблону"));
+            }
+
+            return errors;
+        }
     }
 }
