@@ -8,5 +8,7 @@ namespace Uch_PracticeV3.QueriesExecution
     public enum Queries
     {
         Students_Marks,
+        GroupMarks,
+        ContractsTerminations
     }
 }

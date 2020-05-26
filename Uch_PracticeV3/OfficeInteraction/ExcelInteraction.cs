@@ -15,7 +15,15 @@ namespace Uch_PracticeV3.OfficeInteraction
         {
             using (XLWorkbook workbook = new XLWorkbook(XLEventTracking.Disabled))
             {
-                var worksheet = workbook.Worksheets.Add(enterParams.sheetName);
+                IXLWorksheet worksheet;
+                if (enterParams.sheetName.Length >= 30)
+                {
+                    worksheet = workbook.Worksheets.Add(enterParams.sheetName.Substring(0, 30));
+                }
+                else
+                {
+                    worksheet = workbook.Worksheets.Add(enterParams.sheetName);
+                }
                 //заголовки
                 for (int col = 0; col < enterParams.colnames.Count; col++)
                 {

@@ -31,23 +31,6 @@ namespace Uch_PracticeV3.OfficeInteraction
         //	application/vnd.openxmlformats-officedocument.wordprocessingml.document
         public static MemoryStream ConvertToWord(EnterParams enterParams)
         {
-            //Document doc = new Document();
-
-            //// Use a document builder to add content to the document.
-            //DocumentBuilder builder = new DocumentBuilder(doc);
-            //builder.Writeln("Hello World!");
-
-            //using(MemoryStream stream = new MemoryStream())
-            //{
-            //    doc.Save(stream, SaveFormat.Docx);
-            //    stream.Flush();
-            //    return new FileContentResult(stream.ToArray(),
-            //            "application/vnd.openxmlformats-officedocument.wordprocessingml.document")
-            //    {
-            //        FileDownloadName = $"{enterParams.sheetName}.docx"
-            //    };
-            //}
-
             var stream = new MemoryStream();
             using (WordprocessingDocument doc = WordprocessingDocument.Create(stream, DocumentFormat.OpenXml.WordprocessingDocumentType.Document, true))
             {
@@ -104,6 +87,27 @@ namespace Uch_PracticeV3.OfficeInteraction
                     tableGrid.Append(new GridColumn() { Width = "2394" });
                 }
                 table.AppendChild(tableGrid);
+
+                TableRow tableHeaderRow = new TableRow();
+
+                for (int col = 0; col < enterParams.colnames.Count; col++)
+                {
+                    Paragraph p1 = new Paragraph();
+                    ParagraphProperties pp1 = new ParagraphProperties();
+                    pp1.Justification = new Justification() { Val = JustificationValues.Center };
+                    p1.Append(pp1);
+                    Run run1 = new Run();
+                    RunProperties rp1 = new RunProperties();
+                    rp1.Bold = new Bold();
+                    run1.Append(rp1);
+                    Text text1 = new Text(enterParams.colnames[col]) { Space = SpaceProcessingModeValues.Preserve };
+                    run1.Append(text1);
+                    p1.Append(run1);
+                    tableHeaderRow.Append(new TableCell(p1));
+                }
+
+                table.AppendChild(tableHeaderRow);
+
                 for (int row = 0; row < enterParams.rows.Count; row++)
                 {
                     TableRow tableRow = new TableRow();
@@ -116,10 +120,6 @@ namespace Uch_PracticeV3.OfficeInteraction
 
                         Run run1 = new Run();
                         RunProperties rp1 = new RunProperties();
-                        if (row == 0)
-                        {
-                            rp1.Bold = new Bold();
-                        }
                         run1.Append(rp1);
                         Text text1 = new Text(enterParams.rows[row][col]) { Space = SpaceProcessingModeValues.Preserve };
                         run1.Append(text1);

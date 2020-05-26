@@ -97,6 +97,7 @@ namespace Uch_PracticeV3.Controllers
 
         [Auth]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [Route("Admin/Contracts/{operation}")]
         public async Task<ActionResult> Contracts(string operation, Contract contract)
         {
@@ -192,6 +193,7 @@ namespace Uch_PracticeV3.Controllers
 
         [Auth]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [Route("Admin/Groups/{operation}")]
         public async Task<ActionResult> Groups(string operation, Group _group)
         {
@@ -288,6 +290,7 @@ namespace Uch_PracticeV3.Controllers
 
         [Auth]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [Route("Admin/Leaders/{operation}")]
         public async Task<ActionResult> Leaders(string operation, Leader leader)
         {
@@ -392,6 +395,7 @@ namespace Uch_PracticeV3.Controllers
 
         [Auth]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [Route("Admin/Organizations/{operation}")]
         public async Task<ActionResult> Organizations(string operation, Organization organization)
         {
@@ -487,6 +491,7 @@ namespace Uch_PracticeV3.Controllers
 
         [Auth]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [Route("Admin/Ranks/{operation}")]
         public async Task<ActionResult> Ranks(string operation, Rank rank)
         {
@@ -582,6 +587,7 @@ namespace Uch_PracticeV3.Controllers
 
         [Auth]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [Route("Admin/Sectors/{operation}")]
         public async Task<ActionResult> Sectors(string operation, Sector sector)
         {
@@ -677,6 +683,7 @@ namespace Uch_PracticeV3.Controllers
 
         [Auth]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [Route("Admin/Specialties/{operation}")]
         public async Task<ActionResult> Specialties(string operation, Specialty specialty)
         {
@@ -779,6 +786,7 @@ namespace Uch_PracticeV3.Controllers
 
         [Auth]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [Route("Admin/Students/{operation}")]
         public async Task<ActionResult> Students(string operation, Student student)
         {

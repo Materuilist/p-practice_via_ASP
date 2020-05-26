@@ -1,29 +1,30 @@
 ﻿@using Uch_PracticeV3.Models
 @model Sector
 
-<form action="/Admin/Sectors/@ViewBag.Action" method="post" class="my-3">
-    <div class="form-group">
-        <label for="Id">Код</label>
-        @if (ViewBag.Action == "edit")
-        {
-            <input hidden class="form-control" name="Id" value="@Model.Id" />
-        }
-        else
-        {
-            <input name="Id" required maxlength="10" class="form-control" />
-        }
-    </div>
-    <div class="form-group">
-        <label for="Naming">Название</label>
-        @if (ViewBag.Action == "edit")
-        {
-            <input name="Naming" required maxlength="100" type="text" class="form-control" id="Naming"
-                    value="@Model.Naming">
-        }
-        else
-        {
-            <input name="Naming" required maxlength="100" type="text" class="form-control" id="Naming">
-        }
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+    <form action="/Admin/Sectors/@ViewBag.Action" method="post" class="my-3">
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            <label for="Id">Код</label>
+            @if (ViewBag.Action == "edit")
+            {
+                <input hidden class="form-control" name="Id" value="@Model.Id" />
+            }
+            else
+            {
+                <input name="Id" required maxlength="10" class="form-control" />
+            }
+        </div>
+        <div class="form-group">
+            <label for="Naming">Название</label>
+            @if (ViewBag.Action == "edit")
+            {
+                <input name="Naming" required maxlength="100" type="text" class="form-control" id="Naming"
+                       value="@Model.Naming">
+            }
+            else
+            {
+                <input name="Naming" required maxlength="100" type="text" class="form-control" id="Naming">
+            }
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>

@@ -35,7 +35,6 @@ namespace Uch_PracticeV3.Controllers
         {
             ViewBag.url = Request.Url.AbsolutePath;
             ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
-            ViewBag.returnUrl = returnUrl;
             return View();
         }
 

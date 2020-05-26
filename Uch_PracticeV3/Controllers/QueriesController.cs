@@ -50,8 +50,20 @@ namespace Uch_PracticeV3.Controllers
             return await HandleRequest(Queries.Students_Marks, "Оценки студентов");
         }
 
+        public async Task<ActionResult> GroupsMarks()
+        {
+            ViewBag.url = Request.Url.AbsolutePath;
+            ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
+            return await HandleRequest(Queries.GroupMarks, "Средние оценки студентов (по группам)");
+        }
 
-
+        public async Task<ActionResult> ContractsTerminations()
+        {
+            ViewBag.url = Request.Url.AbsolutePath;
+            ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
+            return await HandleRequest(Queries.ContractsTerminations, $"Предприятия, договор с которыми закончится до " +
+                $"{Request.QueryString.Get("param")} года");
+        }
         private async Task<ActionResult> HandleRequest(Queries queryName, string templateTitle)
         {
             switch (Request.QueryString.Get("format"))

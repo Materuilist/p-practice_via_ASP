@@ -1,144 +1,144 @@
 ﻿@using Uch_PracticeV3.Models
 @model Student
 
-<form action="/Admin/Students/@ViewBag.Action" method="post" class="my-3">
-
-    <div class="form-group">
-        @if (ViewBag.Action == "edit")
-        {
-            <input hidden class="form-control" name="Id" value="@Model.Id" />
-        }
-        else
-        {
-            <label for="Id">Код</label>
-            <input name="Id" required maxlength="20" class="form-control" />
-        }
-    </div>
-    <div class="form-group">
-        <label for="Surname">Фамилия</label>
-        @if (ViewBag.Action == "edit")
-        {
-            <input name="Surname" required maxlength="30" type="text" class="form-control" id="Surname"
-                    value="@Model.Surname">
-        }
-        else
-        {
-            <input name="Surname" required maxlength="30" type="text" class="form-control" id="Surname">
-        }
-    </div>
-    <div class="form-group">
-        <label for="Name">Имя</label>
-        @if (ViewBag.Action == "edit")
-        {
-            <input name="Name" required maxlength="30" type="text" class="form-control" id="Name"
-                    value="@Model.Name">
-        }
-        else
-        {
-            <input name="Name" required maxlength="30" type="text" class="form-control" id="Name">
-        }
-    </div>
-    <div class="form-group">
-        <label for="Patronymic">Отчество</label>
-        @if (ViewBag.Action == "edit")
-        {
-            <input name="Patronymic" required maxlength="20" type="text" class="form-control" id="Patronymic"
-                    value="@Model.Patronymic">
-        }
-        else
-        {
-            <input name="Patronymic" required maxlength="20" type="text" class="form-control" id="Patronymic">
-        }
-    </div>
-    <div class="form-group">
-        <label for="GroupId">Группа</label>
-        <select class="form-control" name="GroupId" id="GroupId">
-            @foreach (Group group in ViewBag.Groups)
+    <form action="/Admin/Students/@ViewBag.Action" method="post" class="my-3">
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            @if (ViewBag.Action == "edit")
             {
-                if (ViewBag.Action == "edit")
-                {
-                    <option selected="@(group.Id == @Model.GroupId)" data-toggle="tooltip"
-                            data-placement="right" title="@group.Naming">
-                        @group.Id
-                    </option>
-                }
-                else
-                {
-                    <option data-toggle="tooltip" data-placement="right" title="@group.Naming">@group.Id</option>
-                }
+                <input hidden class="form-control" name="Id" value="@Model.Id" />
             }
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="LeaderId">Руководитель</label>
-        <select class="form-control" name="LeaderId" id="LeaderId">
-            @foreach (Leader leader in ViewBag.Leaders)
+            else
             {
-                if (ViewBag.Action == "edit")
-                {
-                    <option selected="@(leader.Id == @Model.LeaderId)" data-toggle="tooltip"
-                            data-placement="right" title="@leader.Surname">
-                        @leader.Id
-                    </option>
-                }
-                else
-                {
-                    <option data-toggle="tooltip" data-placement="right" title="@leader.Surname">@leader.Id</option>
-                }
+                <label for="Id">Код</label>
+                <input name="Id" required maxlength="20" class="form-control" />
             }
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="ContractId">Договор</label>
-        <select class="form-control" name="ContractId" id="ContractId">
-            @foreach (Contract contract in ViewBag.Contracts)
+        </div>
+        <div class="form-group">
+            <label for="Surname">Фамилия</label>
+            @if (ViewBag.Action == "edit")
             {
-                if (ViewBag.Action == "edit")
-                {
-                    <option selected="@(contract.Id == @Model.ContractId)" data-toggle="tooltip"
-                            data-placement="right" title="@contract.Enter_Date">
-                        @contract.Id
-                    </option>
-                }
-                else
-                {
-                    <option data-toggle="tooltip" data-placement="right" title="@contract.Enter_Date">@contract.Id</option>
-                }
+                <input name="Surname" required maxlength="30" type="text" class="form-control" id="Surname"
+                       value="@Model.Surname">
             }
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="FileNaming">Название отчета</label>
-        @if (ViewBag.Action == "edit")
-        {
-            <input name="FileNaming" maxlength="50" type="text" class="form-control" id="FileNaming"
-                    value="@Model.FileNaming">
-        }
-        else
-        {
-            <input name="FileNaming" maxlength="50" type="text" class="form-control" id="FileNaming">
-        }
-    </div>
-    <input hidden name="FileData" type="text" id="RealFileData"/>
-    <div class="form-group">
-        <label for="FileData">Файл отчета</label>
-        <input form="none" type="file" accept="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                    class="form-control-file" id="FileData">
-    </div>
-    <div class="form-group">
-        <label for="Result">Результат</label>
-        @if (ViewBag.Action == "edit")
-        {
-            <input name="Result" max="10" min="0" type="number" class="form-control" id="Result"
-                    value="@Model.Result">
-        }
-        else
-        {
-            <input name="Result" max="10" min="0" type="number" class="form-control" id="Result">
-        }
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+            else
+            {
+                <input name="Surname" required maxlength="30" type="text" class="form-control" id="Surname">
+            }
+        </div>
+        <div class="form-group">
+            <label for="Name">Имя</label>
+            @if (ViewBag.Action == "edit")
+            {
+                <input name="Name" required maxlength="30" type="text" class="form-control" id="Name"
+                       value="@Model.Name">
+            }
+            else
+            {
+                <input name="Name" required maxlength="30" type="text" class="form-control" id="Name">
+            }
+        </div>
+        <div class="form-group">
+            <label for="Patronymic">Отчество</label>
+            @if (ViewBag.Action == "edit")
+            {
+                <input name="Patronymic" required maxlength="20" type="text" class="form-control" id="Patronymic"
+                       value="@Model.Patronymic">
+            }
+            else
+            {
+                <input name="Patronymic" required maxlength="20" type="text" class="form-control" id="Patronymic">
+            }
+        </div>
+        <div class="form-group">
+            <label for="GroupId">Группа</label>
+            <select class="form-control" name="GroupId" id="GroupId">
+                @foreach (Group group in ViewBag.Groups)
+                {
+                    if (ViewBag.Action == "edit")
+                    {
+                        <option selected="@(group.Id == @Model.GroupId)" data-toggle="tooltip"
+                                data-placement="right" title="@group.Naming">
+                            @group.Id
+                        </option>
+                    }
+                    else
+                    {
+                        <option data-toggle="tooltip" data-placement="right" title="@group.Naming">@group.Id</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="LeaderId">Руководитель</label>
+            <select class="form-control" name="LeaderId" id="LeaderId">
+                @foreach (Leader leader in ViewBag.Leaders)
+                {
+                    if (ViewBag.Action == "edit")
+                    {
+                        <option selected="@(leader.Id == @Model.LeaderId)" data-toggle="tooltip"
+                                data-placement="right" title="@leader.Surname">
+                            @leader.Id
+                        </option>
+                    }
+                    else
+                    {
+                        <option data-toggle="tooltip" data-placement="right" title="@leader.Surname">@leader.Id</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="ContractId">Договор</label>
+            <select class="form-control" name="ContractId" id="ContractId">
+                @foreach (Contract contract in ViewBag.Contracts)
+                {
+                    if (ViewBag.Action == "edit")
+                    {
+                        <option selected="@(contract.Id == @Model.ContractId)" data-toggle="tooltip"
+                                data-placement="right" title="@contract.Enter_Date">
+                            @contract.Id
+                        </option>
+                    }
+                    else
+                    {
+                        <option data-toggle="tooltip" data-placement="right" title="@contract.Enter_Date">@contract.Id</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="FileNaming">Название отчета</label>
+            @if (ViewBag.Action == "edit")
+            {
+                <input name="FileNaming" maxlength="50" type="text" class="form-control" id="FileNaming"
+                       value="@Model.FileNaming">
+            }
+            else
+            {
+                <input name="FileNaming" maxlength="50" type="text" class="form-control" id="FileNaming">
+            }
+        </div>
+        <input hidden name="FileData" type="text" id="RealFileData" />
+        <div class="form-group">
+            <label for="FileData">Файл отчета</label>
+            <input form="none" type="file" accept="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                   class="form-control-file" id="FileData">
+        </div>
+        <div class="form-group">
+            <label for="Result">Результат</label>
+            @if (ViewBag.Action == "edit")
+            {
+                <input name="Result" max="10" min="0" type="number" class="form-control" id="Result"
+                       value="@Model.Result">
+            }
+            else
+            {
+                <input name="Result" max="10" min="0" type="number" class="form-control" id="Result">
+            }
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 
 <script>
 $('#FileData').on('change', ({ target }) => {
