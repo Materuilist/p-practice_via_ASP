@@ -52,5 +52,5 @@
                 <input name="Termination_Date" type="date" class="form-control" id="Termination_Date">
             }
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">@(ViewBag.Action == "edit"?"Изменить":"Добавить")</button>
     </form>

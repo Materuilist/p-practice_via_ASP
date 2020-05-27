@@ -137,7 +137,7 @@
                 <input name="Result" max="10" min="0" type="number" class="form-control" id="Result">
             }
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">@(ViewBag.Action == "edit"?"Изменить":"Добавить")</button>
     </form>
 
 <script>

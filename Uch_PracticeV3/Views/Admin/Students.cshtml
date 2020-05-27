@@ -30,68 +30,70 @@
     <tbody>
         @foreach (Student student in Model)
         {
-        <tr>
-            <th scope="row">@student.Id</th>
-            <td>@student.Surname</td>
-            <td>@student.Name</td>
-            <td>@student.Patronymic</td>
-            <td>@student.Group.Naming</td>
-            <td>@student.Leader.Surname</td>
-            <td>@student.Contract.Enter_Date</td>
-            @if (student.FileData != null)
-            {
-                if (student.FileNaming != null)
+            <tr>
+                <th scope="row">@student.Id</th>
+                <td>@student.Surname</td>
+                <td>@student.Name</td>
+                <td>@student.Patronymic</td>
+                <td>@student.Group.Naming</td>
+                <td>@student.Leader.Surname</td>
+                <td>@student.Contract.Enter_Date</td>
+                @if (student.FileData != null)
                 {
-                    <td><a href="@student.FileData" download="@(@student.FileNaming+".docx")">@student.FileNaming</a></td>
+                    if (student.FileNaming != null)
+                    {
+                        <td><a href="@student.FileData" download="@(@student.FileNaming+".docx")">@student.FileNaming</a></td>
+                    }
+                    else
+                    {
+                        <td><a href="@student.FileData" download="@(@student.Surname+".docx")">@student.Surname</a></td>
+                    }
                 }
                 else
                 {
-                    <td><a href="@student.FileData" download="@(@student.Surname+".docx")">@student.Surname</a></td>
+                    <td>Пусто</td>
                 }
-            }
-            else
-            {
-                <td>Пусто</td>
-            }
-            <td>@student.Result</td>
-        </tr>
+                <td>@student.Result</td>
+            </tr>
         }
     </tbody>
 </table>
-<nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-center">
-        @if (ViewBag.PageIndex != 1)
-        {
-            <li class="page-item">
-                <a class="page-link" href="Students?page=@(@ViewBag.PageIndex - 1)" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-        }
+@if (ViewBag.NextPageExists || ViewBag.PageIndex != 1)
+{
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            @if (ViewBag.PageIndex != 1)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="Students?page=@(@ViewBag.PageIndex - 1)" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            }
 
-        @if (ViewBag.PageIndex != 1)
-        {
-            <li class="page-item"><a class="page-link" href="Students?page=1">1</a></li>
-        }
+            @if (ViewBag.PageIndex != 1)
+            {
+                <li class="page-item"><a class="page-link" href="Students?page=1">1</a></li>
+            }
 
-        <li class="page-item active"><a class="page-link" href="Students?page=@ViewBag.PageIndex">@ViewBag.PageIndex</a></li>
+            <li class="page-item active"><a class="page-link" href="Students?page=@ViewBag.PageIndex">@ViewBag.PageIndex</a></li>
 
-        @if (ViewBag.NextPageExists)
-        {
-            <li class="page-item"><a class="page-link" href="Students?page=@(@ViewBag.PageIndex + 1)">@(@ViewBag.PageIndex + 1)</a></li>
-            <li class="page-item">
-                <a class="page-link" href="Students?page=@(@ViewBag.PageIndex + 1)" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        }
-    </ul>
-</nav>
-
+            @if (ViewBag.NextPageExists)
+            {
+                <li class="page-item"><a class="page-link" href="Students?page=@(@ViewBag.PageIndex + 1)">@(@ViewBag.PageIndex + 1)</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="Students?page=@(@ViewBag.PageIndex + 1)" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            }
+        </ul>
+    </nav>
+}
 <script>
     const addButtonClickListener = (action = 'edit') => {
         $(`#${action}-button`).on('click', () => {
-            if ($('table').children('tbody').first().children('tr').hasClass('selectable')){
+            if ($('table').children('tbody').first().children('tr').hasClass('selectable')) {
                 return;
             }
             $('#table').children('tbody').first().children('tr').addClass('selectable').on('click', event => {

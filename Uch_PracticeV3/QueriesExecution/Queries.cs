@@ -9,6 +9,8 @@ namespace Uch_PracticeV3.QueriesExecution
     {
         Students_Marks,
         GroupMarks,
-        ContractsTerminations
+        ContractsTerminations,
+        LeadersStudents,
+        PopularOrganizations,
     }
 }

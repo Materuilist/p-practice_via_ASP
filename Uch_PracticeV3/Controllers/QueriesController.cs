@@ -64,6 +64,21 @@ namespace Uch_PracticeV3.Controllers
             return await HandleRequest(Queries.ContractsTerminations, $"Предприятия, договор с которыми закончится до " +
                 $"{Request.QueryString.Get("param")} года");
         }
+        
+        public async Task<ActionResult> LeadersStudents()
+        {
+            ViewBag.url = Request.Url.AbsolutePath;
+            ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
+            return await HandleRequest(Queries.LeadersStudents, "Количество студентов в распоряжении руководителей");
+        }
+
+        
+        public async Task<ActionResult> PopularOrganizations()
+        {
+            ViewBag.url = Request.Url.AbsolutePath;
+            ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
+            return await HandleRequest(Queries.PopularOrganizations, "Самые популярные предприятия");
+        }
         private async Task<ActionResult> HandleRequest(Queries queryName, string templateTitle)
         {
             switch (Request.QueryString.Get("format"))

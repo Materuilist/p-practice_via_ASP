@@ -31,10 +31,40 @@
         </button>
     </div>
     <div class="btn-group dropright list-group-item list-group-item-action px-0 py-0">
-        <button class="btn btn-light dropdown-toggle w-100 py-3" type="button" id="query_2DropdownButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Студенты с оценкой __
+        <button class="btn btn-light dropdown-toggle w-100 py-3" type="button" id="query_3DropdownButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Средние оценки студентов (по группам)
         </button>
-        <div class="dropdown-menu query_2Buttons" aria-labelledby="query_2DropdownButton"">
+        <div class="dropdown-menu" aria-labelledby="query_3DropdownButton">
+            <a class="dropdown-item" href="/Queries/GroupsMarks?format=tab">Просмотр в новой вкладке</a>
+            <a class="dropdown-item" href="/Queries/GroupsMarks?format=excel">Скачать таблицу Excel</a>
+            <a class="dropdown-item" href="/Queries/GroupsMarks?format=word">Скачать таблицу Word</a>
+        </div>
+    </div>
+    <div class="btn-group dropright list-group-item list-group-item-action px-0 py-0">
+        <button class="btn btn-light dropdown-toggle w-100 py-3" type="button" id="query_5DropdownButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Количество студентов в распоряжении руководителей
+        </button>
+        <div class="dropdown-menu" aria-labelledby="query_5DropdownButton">
+            <a class="dropdown-item" href="/Queries/LeadersStudents?format=tab">Просмотр в новой вкладке</a>
+            <a class="dropdown-item" href="/Queries/LeadersStudents?format=excel">Скачать таблицу Excel</a>
+            <a class="dropdown-item" href="/Queries/LeadersStudents?format=word">Скачать таблицу Word</a>
+        </div>
+    </div>
+    <div class="btn-group dropright list-group-item list-group-item-action px-0 py-0">
+        <button class="btn btn-light dropdown-toggle w-100 py-3" type="button" id="query_6DropdownButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Самые популярные предприятия
+        </button>
+        <div class="dropdown-menu" aria-labelledby="query_6DropdownButton">
+            <a class="dropdown-item" href="/Queries/PopularOrganizations?format=tab">Просмотр в новой вкладке</a>
+            <a class="dropdown-item" href="/Queries/PopularOrganizations?format=excel">Скачать таблицу Excel</a>
+            <a class="dropdown-item" href="/Queries/PopularOrganizations?format=word">Скачать таблицу Word</a>
+        </div>
+    </div>
+    <div class="btn-group dropright list-group-item list-group-item-action px-0 py-0">
+        <button class="btn btn-light dropdown-toggle w-100 py-3" type="button" id="query_2DropdownButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Студенты с оценкой <strong class="text-danger">___</strong>
+        </button>
+        <div class="dropdown-menu query_2Buttons" aria-labelledby="query_2DropdownButton" ">
             <button type="button" modal-label="Оценка студента:" modal-input-type="number" modal-link="/Queries/Marks?format=tab" class="btn dropdown-item btn-primary" data-toggle="modal"
                     data-target="#modal">
                 Просмотр в новой вкладке
@@ -50,18 +80,8 @@
         </div>
     </div>
     <div class="btn-group dropright list-group-item list-group-item-action px-0 py-0">
-        <button class="btn btn-light dropdown-toggle w-100 py-3" type="button" id="query_3DropdownButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Средние оценки студентов (по группам)
-        </button>
-        <div class="dropdown-menu" aria-labelledby="query_3DropdownButton">
-            <a class="dropdown-item" href="/Queries/GroupsMarks?format=tab">Просмотр в новой вкладке</a>
-            <a class="dropdown-item" href="/Queries/GroupsMarks?format=excel">Скачать таблицу Excel</a>
-            <a class="dropdown-item" href="/Queries/GroupsMarks?format=word">Скачать таблицу Word</a>
-        </div>
-    </div>
-    <div class="btn-group dropright list-group-item list-group-item-action px-0 py-0">
         <button class="btn btn-light dropdown-toggle w-100 py-3" type="button" id="query_4DropdownButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Предприятия, договор с которыми закончится до __ года
+            Предприятия, договор с которыми закончится до <strong class="text-danger">___</strong> года
         </button>
         <div class="dropdown-menu query_2Buttons" aria-labelledby="query_4DropdownButton">
             <button type="button" modal-label="Год расторжения договора:" modal-input-type="number" modal-link="/Queries/ContractsTerminations?format=tab" class="btn dropdown-item btn-primary" data-toggle="modal"
@@ -76,36 +96,6 @@
                     data-target="#modal">
                 Скачать таблицу Word
             </button>
-        </div>
-    </div>
-    <div class="btn-group dropright list-group-item list-group-item-action px-0 py-0">
-        <button class="btn btn-light dropdown-toggle w-100 py-3" type="button" id="query_1DropdownButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Кнопка выпадающего списка
-        </button>
-        <div class="dropdown-menu" aria-labelledby="query_1DropdownButton">
-            <a class="dropdown-item" href="#1">Просмотр в новой вкладке</a>
-            <a class="dropdown-item" href="#2">Скачать таблицу Excel</a>
-            <a class="dropdown-item" href="#3">Скачать таблицу Word</a>
-        </div>
-    </div>
-    <div class="btn-group dropright list-group-item list-group-item-action px-0 py-0">
-        <button class="btn btn-light dropdown-toggle w-100 py-3" type="button" id="query_1DropdownButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Кнопка выпадающего списка
-        </button>
-        <div class="dropdown-menu" aria-labelledby="query_1DropdownButton">
-            <a class="dropdown-item" href="#1">Просмотр в новой вкладке</a>
-            <a class="dropdown-item" href="#2">Скачать таблицу Excel</a>
-            <a class="dropdown-item" href="#3">Скачать таблицу Word</a>
-        </div>
-    </div>
-    <div class="btn-group dropright list-group-item list-group-item-action px-0 py-0">
-        <button class="btn btn-light dropdown-toggle w-100 py-3" type="button" id="query_1DropdownButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Кнопка выпадающего списка
-        </button>
-        <div class="dropdown-menu" aria-labelledby="query_1DropdownButton">
-            <a class="dropdown-item" href="#1">Просмотр в новой вкладке</a>
-            <a class="dropdown-item" href="#2">Скачать таблицу Excel</a>
-            <a class="dropdown-item" href="#3">Скачать таблицу Word</a>
         </div>
     </div>
 </div>

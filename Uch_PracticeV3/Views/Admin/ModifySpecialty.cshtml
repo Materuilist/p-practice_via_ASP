@@ -4,13 +4,13 @@
     <form action="/Admin/Specialties/@ViewBag.Action" method="post" class="my-3">
         @Html.AntiForgeryToken()
         <div class="form-group">
-            <label for="Id">Код</label>
             @if (ViewBag.Action == "edit")
             {
                 <input hidden class="form-control" name="Id" value="@Model.Id" />
             }
             else
             {
+                <label for="Id">Код</label>
                 <input name="Id" required placeholder="Код специальности в формате XX.XX.XX" pattern="^\d{2}.\d{2}.\d{2}$" maxlength="8" class="form-control" />
             }
         </div>
@@ -26,5 +26,5 @@
                 <input name="Educational_Program" maxlength="70" type="text" class="form-control" id="Educational_Program">
             }
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">@(ViewBag.Action == "edit"?"Изменить":"Добавить")</button>
     </form>

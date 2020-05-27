@@ -29,65 +29,69 @@
             <tr>
                 <th scope="row">@contract.Id</th>
                 <td>@contract.Organization.FullNaming</td>
-                <td>@if (contract.Students.Count == 0)
-                {
-                    <span>Пусто...</span>
-                }
-                else {
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle btn-info" type="button" id="dropdownMenuButton"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            @contract.Students.First().Surname
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            @foreach (Student student in contract.Students)
-                            {
-                            <span class="dropdown-item">@student.Surname</span>
-                            }
+                <td>
+                    @if (contract.Students.Count == 0)
+                    {
+                        <span>Пусто...</span>
+                    }
+                    else
+                    {
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle btn-info" type="button" id="dropdownMenuButton"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                @contract.Students.First().Surname
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                @foreach (Student student in contract.Students)
+                                {
+                                    <span class="dropdown-item">@student.Surname</span>
+                                }
+                            </div>
                         </div>
-                    </div>
-                }
-                </td>
-                <td>@contract.Enter_Date</td>
-                <td>@contract.Termination_Date</td>
-            </tr>
-        }
+                    }
+            </td>
+            <td>@contract.Enter_Date</td>
+            <td>@contract.Termination_Date</td>
+        </tr>
+    }
     </tbody>
 </table>
-<nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-center">
-        @if (ViewBag.PageIndex != 1)
-        {
-            <li class="page-item">
-                <a class="page-link" href="Contracts?page=@(@ViewBag.PageIndex - 1)" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-        }
+@if (ViewBag.NextPageExists || ViewBag.PageIndex != 1)
+{
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            @if (ViewBag.PageIndex != 1)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="Contracts?page=@(@ViewBag.PageIndex - 1)" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            }
 
-        @if (ViewBag.PageIndex != 1)
-        {
-            <li class="page-item"><a class="page-link" href="Contracts?page=1">1</a></li>
-        }
+            @if (ViewBag.PageIndex != 1)
+            {
+                <li class="page-item"><a class="page-link" href="Contracts?page=1">1</a></li>
+            }
 
-        <li class="page-item active"><a class="page-link" href="Contracts?page=@ViewBag.PageIndex">@ViewBag.PageIndex</a></li>
+            <li class="page-item active"><a class="page-link" href="Contracts?page=@ViewBag.PageIndex">@ViewBag.PageIndex</a></li>
 
-        @if (ViewBag.NextPageExists)
-        {
-            <li class="page-item"><a class="page-link" href="Contracts?page=@(@ViewBag.PageIndex + 1)">@(@ViewBag.PageIndex + 1)</a></li>
-            <li class="page-item">
-                <a class="page-link" href="Contracts?page=@(@ViewBag.PageIndex + 1)" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        }
-    </ul>
-</nav>
-
+            @if (ViewBag.NextPageExists)
+            {
+                <li class="page-item"><a class="page-link" href="Contracts?page=@(@ViewBag.PageIndex + 1)">@(@ViewBag.PageIndex + 1)</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="Contracts?page=@(@ViewBag.PageIndex + 1)" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            }
+        </ul>
+    </nav>
+}
 <script>
     const addButtonClickListener = (action = 'edit') => {
         $(`#${action}-button`).on('click', () => {
-            if ($('table').children('tbody').first().children('tr').hasClass('selectable')){
+            if ($('table').children('tbody').first().children('tr').hasClass('selectable')) {
                 return;
             }
             $('#table').children('tbody').first().children('tr').addClass('selectable').on('click', event => {

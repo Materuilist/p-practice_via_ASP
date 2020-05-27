@@ -154,6 +154,78 @@ namespace Uch_PracticeV3.QueriesExecution
                         sheetName = "Предприятия, с контрактами до " + param + " года";
                         break;
                     }
+                case Queries.LeadersStudents:
+                    {
+                        sheetName = "Количество студентов в распоряжении руководителей";
+                        rows = (await (from student in db.Students
+                                       join leader in db.Leaders on student.LeaderId equals leader.Id
+                                       join rank in db.Ranks on leader.RankId equals rank.Id
+                                       group leader by new { leader.Id, leader.Surname, leader.Name, rank.Naming, 
+                                           leader.Patronymic }
+                                into grouping
+                                       orderby grouping.Count() descending
+                                       select new
+                                       {
+                                           surname = grouping.Key.Surname,
+                                           name = grouping.Key.Name,
+                                           patronymic = grouping.Key.Patronymic,
+                                           rank = grouping.Key.Naming,
+                                           StudentsCount = grouping.Count()
+                                       }).ToListAsync()).ConvertAll((t) => new List<string>()
+                                       { t.surname, t.name, t.patronymic, t.rank, t.StudentsCount.ToString() });
+                        colnames = new List<string>()
+                            {
+                                "Фамилия",
+                                "Имя",
+                                "Отчество",
+                                "Должность",
+                                "Количество студентов"
+                            };
+                        break;
+                    }
+                case Queries.PopularOrganizations:
+                    {
+                        sheetName = "Самые популярные предприятия";
+                        rows = (await (from student in db.Students
+                                    join gr in db.Groups on student.GroupId equals gr.Id
+                                    join contract in db.Contracts on student.ContractId equals contract.Id
+                                    join org in db.Organizations on contract.OrganizationId equals org.Id
+                                    join sector in db.Sectors on org.SectorId equals sector.Id
+                                    group org by new { org.Id, org.FullNaming, org.Sector.Naming, grId = gr.Id, grNaming = gr.Naming }
+                                    into grouping
+                                    select new
+                                    {
+                                        orgId = grouping.Key.Id,
+                                        orgNaming = grouping.Key.FullNaming,
+                                        orgSector = grouping.Key.Naming,
+                                        grId = grouping.Key.grId,
+                                        grNaming = grouping.Key.grNaming,
+                                        studentsCount = grouping.Count()
+                                    } into grouping where grouping.studentsCount == (from student in db.Students
+                                                     join gr in db.Groups on student.GroupId equals gr.Id
+                                                     join contract in db.Contracts on student.ContractId equals contract.Id
+                                                     join org in db.Organizations on contract.OrganizationId equals org.Id
+                                                     where gr.Id == grouping.grId
+                                                     group org by new { org.Id, grId = gr.Id }
+                                                     into subGrouping
+                                                     select new
+                                                     {
+                                                         orgId = subGrouping.Key.Id,
+                                                         grId = subGrouping.Key.grId,
+                                                         studentsCount = subGrouping.Count()
+                                                     } into gr
+                                                     group gr by gr.grId into maxGrouping select maxGrouping.Max(g=>g.studentsCount)).FirstOrDefault()
+                                                     select new { grouping.grNaming, grouping.studentsCount, grouping.orgNaming, grouping.orgSector}).ToListAsync()).ConvertAll((t) => new List<string>()
+                                       { t.grNaming, t.studentsCount.ToString(), t.orgNaming, t.orgSector});
+                        colnames = new List<string>()
+                         {
+                                "Группа",
+                                "Количество студентов",
+                                "Предприятие",
+                                "Отрасль"
+                         };
+                        break;
+                    }
             }
 
             db.Dispose();
