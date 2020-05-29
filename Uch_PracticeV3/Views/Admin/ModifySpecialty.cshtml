@@ -11,12 +11,19 @@
             else
             {
                 <label for="Id">Код</label>
-                <input name="Id" required placeholder="Код специальности в формате XX.XX.XX" pattern="^\d{2}.\d{2}.\d{2}$" maxlength="8" class="form-control" />
+                if (ViewBag.Errors != null)
+                {
+                    <input name="Id" value="@Model.Id" required placeholder="Код специальности в формате XX.XX.XX" pattern="^\d{2}.\d{2}.\d{2}$" maxlength="8" class="form-control" />
+                }
+                else
+                {
+                    <input name="Id" required placeholder="Код специальности в формате XX.XX.XX" pattern="^\d{2}.\d{2}.\d{2}$" maxlength="8" class="form-control" />
+                }
             }
         </div>
         <div class="form-group">
             <label for="Educational_Program">Направление подготовки</label>
-            @if (ViewBag.Action == "edit")
+            @if (ViewBag.Action == "edit" || ViewBag.Errors != null)
             {
                 <input name="Educational_Program" maxlength="70" type="text" class="form-control" id="Educational_Program"
                        value="@Model.Educational_Program">

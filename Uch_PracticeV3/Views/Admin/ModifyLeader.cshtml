@@ -9,7 +9,7 @@
         }
         <div class="form-group">
             <label for="Surname">Фамилия</label>
-            @if (ViewBag.Action == "edit")
+            @if (ViewBag.Action == "edit" || ViewBag.Errors != null)
             {
                 <input required maxlength="30" name="Surname" type="text" class="form-control" id="Surname"
                        value="@Model.Surname">
@@ -21,7 +21,7 @@
         </div>
         <div class="form-group">
             <label for="Name">Имя</label>
-            @if (ViewBag.Action == "edit")
+            @if (ViewBag.Action == "edit" || ViewBag.Errors != null)
             {
                 <input required maxlength="30" name="Name" type="text" class="form-control" id="Name"
                        value="@Model.Name">
@@ -33,7 +33,7 @@
         </div>
         <div class="form-group">
             <label for="Patronymic">Отчество</label>
-            @if (ViewBag.Action == "edit")
+            @if (ViewBag.Action == "edit" || ViewBag.Errors != null)
             {
                 <input name="Patronymic" maxlength="30" type="text" class="form-control" id="Patronymic"
                        value="@Model.Patronymic">
@@ -48,7 +48,7 @@
             <select class="form-control" name="RankId" id="RankId">
                 @foreach (Rank rank in ViewBag.Ranks)
                 {
-                    if (ViewBag.Action == "edit")
+                    if (ViewBag.Action == "edit" || ViewBag.Errors != null)
                     {
                         <option selected="@(rank.Id == @Model.RankId)" data-toggle="tooltip"
                                 data-placement="right" title="@rank.Naming">
@@ -64,19 +64,19 @@
         </div>
         <div class="form-group">
             <label for="Email">Email</label>
-            @if (ViewBag.Action == "edit")
+            @if (ViewBag.Action == "edit" || ViewBag.Errors != null)
             {
-                <input name="Email" maxlength="40" type="email" placeholder="@("почта@mail.ru")" pattern="@("^[A-Za-z]+@mail.ru$")" class="form-control" id="Email"
+                <input name="Email" maxlength="40" type="email" placeholder="@("почта руководителя")" pattern="@(@"^[A-Za-z]+@[A-Za-z]+\.ru$")" class="form-control" id="Email"
                        value="@Model.Email">
             }
             else
             {
-                <input name="Email" maxlength="40" type="email" placeholder="@("почта@mail.ru")" pattern="@("^[A-Za-z]+@mail.ru$")" class="form-control" id="Email">
+                <input name="Email" maxlength="40" type="email" placeholder="@("почта руководителя")" pattern="@(@"^[A-Za-z]+@[A-Za-z]+\.ru$")" class="form-control" id="Email">
             }
         </div>
         <div class="form-group">
             <label for="Phone">Телефон</label>
-            @if (ViewBag.Action == "edit")
+            @if (ViewBag.Action == "edit" || ViewBag.Errors != null)
             {
                 <input name="Phone" type="text" placeholder="Телефон в формате (89XXXXXXXXX)" pattern="^89\d{9}$" class="form-control" id="Phone"
                        value="@Model.Phone">

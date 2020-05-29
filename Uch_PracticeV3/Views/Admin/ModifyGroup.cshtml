@@ -9,7 +9,7 @@
         }
         <div class="form-group">
             <label for="Naming">Название</label>
-            @if (ViewBag.Action == "edit")
+            @if (ViewBag.Action == "edit" || ViewBag.Errors != null)
             {
                 <input name="Naming" required maxlength="9" placeholder="Название в формате (А-Я*-XX-X)"
                        pattern="^[А-Я]+-\d{2}-\d$" type="text" class="form-control" id="Naming"
@@ -26,7 +26,7 @@
             <select class="form-control" required name="SpecialtyId" id="SpecialtyId">
                 @foreach (Specialty spec in ViewBag.Specialties)
                 {
-                    if (ViewBag.Action == "edit")
+                    if (ViewBag.Action == "edit" || ViewBag.Errors != null)
                     {
                         <option selected="@(spec.Id == @Model.SpecialtyId)" data-toggle="tooltip"
                                 data-placement="right" title="@spec.Educational_Program">

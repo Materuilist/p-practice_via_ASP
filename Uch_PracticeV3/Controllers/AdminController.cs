@@ -101,9 +101,9 @@ namespace Uch_PracticeV3.Controllers
         [Route("Admin/Contracts/{operation}")]
         public async Task<ActionResult> Contracts(string operation, Contract contract)
         {
-            if (contract.Enter_Date>contract.Termination_Date)
+            if (contract.Termination_Date!=null && contract.Enter_Date>contract.Termination_Date)
             {
-                ModelState.AddModelError("", "Год заключения договора не должен быть больше года его окончания");
+                ModelState.AddModelError("", "Дата заключения договора не должен быть больше даты его расторжения");
             }
             if (!ModelState.IsValid)
             {
@@ -197,7 +197,7 @@ namespace Uch_PracticeV3.Controllers
         [Route("Admin/Groups/{operation}")]
         public async Task<ActionResult> Groups(string operation, Group _group)
         {
-            if ((from gr in db.Groups where gr.Naming == _group.Naming select gr)
+            if ((from gr in db.Groups where gr.Naming == _group.Naming && gr.Id!=_group.Id select gr)
                    .FirstOrDefault() != null)
             {
                 ModelState.AddModelError("", "Группа с таким названием уже есть");
@@ -295,12 +295,12 @@ namespace Uch_PracticeV3.Controllers
         public async Task<ActionResult> Leaders(string operation, Leader leader)
         {
             //email не уникален
-            if ((from lead in db.Leaders where lead.Email == leader.Email select lead)
+            if ((from lead in db.Leaders where lead.Email == leader.Email && lead.Id!=leader.Id select lead)
                 .FirstOrDefault() != null)
             {
                 ModelState.AddModelError("", "Руководитель с таким Email уже есть");
             }
-            if ((from lead in db.Leaders where lead.Phone == leader.Phone select lead)
+            if ((from lead in db.Leaders where lead.Phone == leader.Phone && lead.Id != leader.Id select lead)
                 .FirstOrDefault() != null)
             {
                 ModelState.AddModelError("", "Руководитель с таким телефоном уже есть");
@@ -399,7 +399,8 @@ namespace Uch_PracticeV3.Controllers
         [Route("Admin/Organizations/{operation}")]
         public async Task<ActionResult> Organizations(string operation, Organization organization)
         {
-            if ((from org in db.Organizations where org.FullNaming == organization.FullNaming select org)
+            if ((from org in db.Organizations where org.FullNaming == organization.FullNaming && org.Id!=organization.Id
+                 select org)
                    .FirstOrDefault() != null)
             {
                 ModelState.AddModelError("", "Организация с таким полным названием уже есть");
@@ -495,7 +496,7 @@ namespace Uch_PracticeV3.Controllers
         [Route("Admin/Ranks/{operation}")]
         public async Task<ActionResult> Ranks(string operation, Rank rank)
         {
-            if ((from r in db.Ranks where r.Naming == rank.Naming select r)
+            if ((from r in db.Ranks where r.Naming == rank.Naming && r.Id!=rank.Id select r)
                    .FirstOrDefault() != null)
             {
                 ModelState.AddModelError("", "Должность с таким названием уже есть");
@@ -591,7 +592,7 @@ namespace Uch_PracticeV3.Controllers
         [Route("Admin/Sectors/{operation}")]
         public async Task<ActionResult> Sectors(string operation, Sector sector)
         {
-            if ((from sect in db.Sectors where sect.Naming == sector.Naming select sect)
+            if ((from sect in db.Sectors where sect.Naming == sector.Naming && sect.Id!=sector.Id select sect)
                    .FirstOrDefault() != null)
             {
                 ModelState.AddModelError("", "Отрасль с таким названием уже есть");
@@ -687,7 +688,8 @@ namespace Uch_PracticeV3.Controllers
         [Route("Admin/Specialties/{operation}")]
         public async Task<ActionResult> Specialties(string operation, Specialty specialty)
         {
-            if ((from spec in db.Specialties where spec.Educational_Program == specialty.Educational_Program select
+            if ((from spec in db.Specialties where spec.Educational_Program == specialty.Educational_Program && spec.Id!=specialty.Id
+                 select
                  spec)
                    .FirstOrDefault() != null)
             {

@@ -11,12 +11,19 @@
             else
             {
                 <label for="Id">Код</label>
-                <input name="Id" required maxlength="10" class="form-control" />
+                if (ViewBag.Errors != null)
+                {
+                    <input name="Id" required maxlength="10" class="form-control" value="@Model.Id" />
+                }
+                else
+                {
+                    <input name="Id" required maxlength="10" class="form-control" />
+                }
             }
         </div>
         <div class="form-group">
             <label for="Naming">Название</label>
-            @if (ViewBag.Action == "edit")
+            @if (ViewBag.Action == "edit" || ViewBag.Errors != null)
             {
                 <input name="Naming" required maxlength="100" type="text" class="form-control" id="Naming"
                        value="@Model.Naming">

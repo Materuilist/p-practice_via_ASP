@@ -43,7 +43,6 @@ namespace Uch_PracticeV3.Models
         [MaxLength(40)]
         public string Email { get; set; }
         [Display(Name = "Телефон")]
-        [Index(IsUnique = true)]
         [StringLength(11)]
         public string Phone { get; set; }
     
@@ -55,11 +54,11 @@ namespace Uch_PracticeV3.Models
         {
             List<ValidationResult> errors = new List<ValidationResult>();
             
-            if(new Regex(@"^[A-Za-z]+@mail.ru$").Matches(this.Email).Count <= 0)
+            if(this.Email!=null && new Regex(@"^[A-Za-z]+@[A-Za-z]+\.ru$").Matches(this.Email).Count <= 0)
             {
                 errors.Add(new ValidationResult("Email не соответствует шаблону"));
             }
-            if (new Regex(@"^89\d{9}$").Matches(this.Phone).Count <= 0)
+            if (this.Phone!=null && new Regex(@"^89\d{9}$").Matches(this.Phone).Count <= 0)
             {
                 errors.Add(new ValidationResult("Телефон не соответствует шаблону"));
             }
