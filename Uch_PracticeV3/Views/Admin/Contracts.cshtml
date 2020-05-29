@@ -1,9 +1,9 @@
 ﻿@using Uch_PracticeV3.Models
 @model List<Contract>
 
-<div class="row justify-content-between">
+<div id="header" class="row justify-content-between position-relative">
     <div class="col-md-4 col-sm-6">
-        <h2 class="text-primary my-4">Таблица догворов:</h2>
+        <h2 class="text-primary my-4">Таблица договоров:</h2>
     </div>
     <div class="col-md-4 col-sm-6 d-flex flex-column justify-content-around">
         <div class="row align-items-center">
@@ -49,58 +49,12 @@
                             </div>
                         </div>
                     }
-            </td>
-            <td>@contract.Enter_Date</td>
-            <td>@contract.Termination_Date</td>
-        </tr>
-    }
+                </td>
+                <td>@contract.Enter_Date</td>
+                <td>@contract.Termination_Date</td>
+            </tr>
+        }
     </tbody>
 </table>
-@if (ViewBag.NextPageExists || ViewBag.PageIndex != 1)
-{
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-            @if (ViewBag.PageIndex != 1)
-            {
-                <li class="page-item">
-                    <a class="page-link" href="Contracts?page=@(@ViewBag.PageIndex - 1)" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-            }
-
-            @if (ViewBag.PageIndex != 1)
-            {
-                <li class="page-item"><a class="page-link" href="Contracts?page=1">1</a></li>
-            }
-
-            <li class="page-item active"><a class="page-link" href="Contracts?page=@ViewBag.PageIndex">@ViewBag.PageIndex</a></li>
-
-            @if (ViewBag.NextPageExists)
-            {
-                <li class="page-item"><a class="page-link" href="Contracts?page=@(@ViewBag.PageIndex + 1)">@(@ViewBag.PageIndex + 1)</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="Contracts?page=@(@ViewBag.PageIndex + 1)" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            }
-        </ul>
-    </nav>
-}
-<script>
-    const addButtonClickListener = (action = 'edit') => {
-        $(`#${action}-button`).on('click', () => {
-            if ($('table').children('tbody').first().children('tr').hasClass('selectable')) {
-                return;
-            }
-            $('#table').children('tbody').first().children('tr').addClass('selectable').on('click', event => {
-                const id = event.target.closest('tr').firstElementChild.textContent;
-                window.location.assign(`/Admin/Contracts?action=${action}&rowId=${id}`);
-            });
-        });
-    };
-    $('#add-button').on('click', () => window.location.assign('/Admin/Contracts?action=add'));
-    addButtonClickListener('edit');
-    addButtonClickListener('delete');
-</script>
+@{Html.RenderPartial("Pagination");}
+@{Html.RenderPartial("ButtonsScript");}

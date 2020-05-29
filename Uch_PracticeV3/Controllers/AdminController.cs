@@ -41,9 +41,19 @@ namespace Uch_PracticeV3.Controllers
             return View();
         }
 
+        //public ActionResult ButtonsScript()
+        //{
+        //    return PartialView("ButtonsScript");
+        //}
+        //public ActionResult Pagination()
+        //{
+        //    return PartialView("Pagination");
+        //}
+
         [Auth]
         public async Task<ActionResult> Contracts()
         {
+            ViewBag.Table = "Contracts";
             ViewBag.Title = "Договоры";
             ViewBag.url = Request.Url.AbsolutePath;
             ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
@@ -140,6 +150,7 @@ namespace Uch_PracticeV3.Controllers
         [Auth]
         public async Task<ActionResult> Groups()
         {
+            ViewBag.Table = "Groups";
             ViewBag.Title = "Группы";
             ViewBag.url = Request.Url.AbsolutePath;
             ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
@@ -237,6 +248,7 @@ namespace Uch_PracticeV3.Controllers
         [Auth]
         public async Task<ActionResult> Leaders()
         {
+            ViewBag.Table = "Leaders";
             ViewBag.Title = "Руководители";
             ViewBag.url = Request.Url.AbsolutePath;
             ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
@@ -341,6 +353,7 @@ namespace Uch_PracticeV3.Controllers
         [Auth]
         public async Task<ActionResult> Organizations()
         {
+            ViewBag.Table = "Organizations";
             ViewBag.Title = "Организации";
             ViewBag.url = Request.Url.AbsolutePath;
             ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
@@ -441,6 +454,7 @@ namespace Uch_PracticeV3.Controllers
         [Auth]
         public async Task<ActionResult> Ranks()
         {
+            ViewBag.Table = "Ranks";
             ViewBag.Title = "Должности";
             ViewBag.url = Request.Url.AbsolutePath;
             ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
@@ -536,6 +550,7 @@ namespace Uch_PracticeV3.Controllers
         [Auth]
         public async Task<ActionResult> Sectors()
         {
+            ViewBag.Table = "Sectors";
             ViewBag.Title = "Отрасли";
             ViewBag.url = Request.Url.AbsolutePath;
             ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
@@ -632,6 +647,7 @@ namespace Uch_PracticeV3.Controllers
         [Auth]
         public async Task<ActionResult> Specialties()
         {
+            ViewBag.Table = "Specialties";
             ViewBag.Title = "Специальности";
             ViewBag.url = Request.Url.AbsolutePath;
             ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
@@ -730,6 +746,7 @@ namespace Uch_PracticeV3.Controllers
         [Auth]
         public async Task<ActionResult> Students()
         {
+            ViewBag.Table = "Students";
             ViewBag.Title = "Студенты";
             ViewBag.url = Request.Url.AbsolutePath;
             ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;

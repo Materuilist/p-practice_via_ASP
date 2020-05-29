@@ -2,3 +2,11 @@
     opacity:.5;
     cursor:pointer;
 }
+
+.editable{
+    color:#ff9a00;
+}
+
+.deleteable{
+    color:#ff0000;
+}

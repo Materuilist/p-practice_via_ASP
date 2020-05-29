@@ -241,6 +241,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
+    <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -369,6 +370,9 @@
     <Content Include="Views\Queries\Index.cshtml" />
     <Content Include="Views\Queries\Result.cshtml" />
     <Content Include="Views\Queries\StudentsWithFiles.cshtml" />
+    <Content Include="Views\About\Index.cshtml" />
+    <Content Include="Views\Admin\ButtonsScript.cshtml" />
+    <Content Include="Views\Admin\Pagination.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
