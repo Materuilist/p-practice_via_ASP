@@ -19,13 +19,6 @@ namespace Uch_PracticeV3.Controllers
 {
     public class QueriesController : Controller
     {
-        private ApplicationUserManager UserManager
-        {
-            get
-            {
-                return HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-        }
         private IAuthenticationManager AuthenticationManager
         {
             get

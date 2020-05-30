@@ -19,13 +19,6 @@ namespace Uch_PracticeV3.Controllers
     {
         private const int ITEMS_PER_PAGE = 3;
         private Uch_PracticeEntities db = new Uch_PracticeEntities();
-        private ApplicationUserManager UserManager
-        {
-            get
-            {
-                return HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-        }
         private IAuthenticationManager AuthenticationManager
         {
             get
@@ -33,7 +26,7 @@ namespace Uch_PracticeV3.Controllers
                 return HttpContext.GetOwinContext().Authentication;
             }
         }
-        [Auth]
+        [Authorize(Roles ="manager")]
         public ActionResult Index()
         {
             ViewBag.url = Request.Url.AbsolutePath;
@@ -50,7 +43,7 @@ namespace Uch_PracticeV3.Controllers
         //    return PartialView("Pagination");
         //}
 
-        [Auth]
+        [Authorize(Roles = "manager")]
         public async Task<ActionResult> Contracts()
         {
             ViewBag.Table = "Contracts";
@@ -105,7 +98,7 @@ namespace Uch_PracticeV3.Controllers
                 .Include(c=>c.Organization).Include(c=>c.Students).ToListAsync());
         }
 
-        [Auth]
+        [Authorize(Roles = "manager")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("Admin/Contracts/{operation}")]
@@ -147,7 +140,7 @@ namespace Uch_PracticeV3.Controllers
             return Redirect("/Admin/Contracts?page=1");
         }
 
-        [Auth]
+        [Authorize(Roles = "manager")]
         public async Task<ActionResult> Groups()
         {
             ViewBag.Table = "Groups";
@@ -202,7 +195,7 @@ namespace Uch_PracticeV3.Controllers
                 .Include(g => g.Specialty).Include(g=>g.Students).ToListAsync());
         }
 
-        [Auth]
+        [Authorize(Roles = "manager")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("Admin/Groups/{operation}")]
@@ -245,7 +238,7 @@ namespace Uch_PracticeV3.Controllers
             return Redirect("/Admin/Groups?page=1");
         }
 
-        [Auth]
+        [Authorize(Roles = "manager")]
         public async Task<ActionResult> Leaders()
         {
             ViewBag.Table = "Leaders";
@@ -300,7 +293,7 @@ namespace Uch_PracticeV3.Controllers
                 .Include(l => l.Rank).Include(l => l.Students).ToListAsync());
         }
 
-        [Auth]
+        [Authorize(Roles = "manager")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("Admin/Leaders/{operation}")]
@@ -350,7 +343,7 @@ namespace Uch_PracticeV3.Controllers
             return Redirect("/Admin/Leaders?page=1");
         }
 
-        [Auth]
+        [Authorize(Roles = "manager")]
         public async Task<ActionResult> Organizations()
         {
             ViewBag.Table = "Organizations";
@@ -406,7 +399,7 @@ namespace Uch_PracticeV3.Controllers
                 .Include(o => o.Contracts).Include(o => o.Sector).ToListAsync());
         }
 
-        [Auth]
+        [Authorize(Roles = "manager")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("Admin/Organizations/{operation}")]
@@ -451,7 +444,7 @@ namespace Uch_PracticeV3.Controllers
             return Redirect("/Admin/Organizations?page=1");
         }
 
-        [Auth]
+        [Authorize(Roles = "manager")]
         public async Task<ActionResult> Ranks()
         {
             ViewBag.Table = "Ranks";
@@ -504,7 +497,7 @@ namespace Uch_PracticeV3.Controllers
                 .Include(r => r.Leaders).ToListAsync());
         }
 
-        [Auth]
+        [Authorize(Roles = "manager")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("Admin/Ranks/{operation}")]
@@ -547,7 +540,7 @@ namespace Uch_PracticeV3.Controllers
             return Redirect("/Admin/Ranks?page=1");
         }
 
-        [Auth]
+        [Authorize(Roles = "manager")]
         public async Task<ActionResult> Sectors()
         {
             ViewBag.Table = "Sectors";
@@ -601,7 +594,7 @@ namespace Uch_PracticeV3.Controllers
                 .Include(s => s.Organizations).ToListAsync());
         }
 
-        [Auth]
+        [Authorize(Roles = "manager")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("Admin/Sectors/{operation}")]
@@ -644,7 +637,7 @@ namespace Uch_PracticeV3.Controllers
             return Redirect("/Admin/Sectors?page=1");
         }
 
-        [Auth]
+        [Authorize(Roles = "manager")]
         public async Task<ActionResult> Specialties()
         {
             ViewBag.Table = "Specialties";
@@ -698,7 +691,7 @@ namespace Uch_PracticeV3.Controllers
                 .Include(s => s.Groups).ToListAsync());
         }
 
-        [Auth]
+        [Authorize(Roles = "manager")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("Admin/Specialties/{operation}")]
@@ -743,7 +736,7 @@ namespace Uch_PracticeV3.Controllers
             return Redirect("/Admin/Specialties?page=1");
         }
 
-        [Auth]
+        [Authorize(Roles = "manager")]
         public async Task<ActionResult> Students()
         {
             ViewBag.Table = "Students";
@@ -803,7 +796,7 @@ namespace Uch_PracticeV3.Controllers
                 .Include(s => s.Contract).Include(s => s.Leader).Include(s=>s.Group).ToListAsync());
         }
 
-        [Auth]
+        [Authorize(Roles = "manager")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("Admin/Students/{operation}")]

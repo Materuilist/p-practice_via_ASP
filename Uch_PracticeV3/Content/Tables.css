@@ -3,7 +3,7 @@
     cursor:pointer;
 }
 
-.editable{
+.editable, .updateable{
     color:#ff9a00;
 }
 

@@ -246,6 +246,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\QueriesController.cs" />
+    <Compile Include="Controllers\SuperUserController.cs" />
     <Compile Include="Filters\Auth.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -256,10 +257,12 @@
     <Compile Include="Models\Group.cs">
       <DependentUpon>PracticeEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Identity\ApplicationContext.cs" />
-    <Compile Include="Models\Identity\ApplicationUser.cs" />
-    <Compile Include="Models\Identity\ApplicationUserManager.cs" />
+    <Compile Include="Models\Identity\IdentityExtensions.cs" />
     <Compile Include="Models\Identity\LoginModel.cs" />
+    <Compile Include="Models\Identity\Role.cs" />
+    <Compile Include="Models\Identity\User.cs" />
+    <Compile Include="Models\Identity\UserContext.cs" />
+    <Compile Include="Models\Identity\UserDbInitializer.cs" />
     <Compile Include="Models\Leader.cs">
       <DependentUpon>PracticeEntities.tt</DependentUpon>
     </Compile>
@@ -373,6 +376,8 @@
     <Content Include="Views\About\Index.cshtml" />
     <Content Include="Views\Admin\ButtonsScript.cshtml" />
     <Content Include="Views\Admin\Pagination.cshtml" />
+    <Content Include="Views\SuperUser\Index.cshtml" />
+    <Content Include="Views\SuperUser\Modify.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

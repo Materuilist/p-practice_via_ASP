@@ -1,0 +1,36 @@
+﻿@using Uch_PracticeV3.Models.Identity
+@model User
+
+    <form action="/SuperUser/Managers/@ViewBag.Action" method="post" class="my-3">
+        @Html.AntiForgeryToken()
+        @if (ViewBag.Action == "update")
+        {
+            <input hidden name="Id" value="@Model.Id" />
+        }
+        <div class="form-group">
+            <label for="Email">Email</label>
+            @if (ViewBag.Action == "update" || ViewBag.Errors != null)
+            {
+                <input required name="Email" type="email" placeholder="почта менеджера УО" pattern="@(@"^[A-Za-z]+@[A-Za-z]+\.ru$")" class="form-control" id="Email"
+                       value="@Model.Email">
+            }
+            else
+            {
+                <input required name="Email" type="email" placeholder="почта менеджера УО" pattern="@(@"^[A-Za-z]+@[A-Za-z]+\.ru$")" class="form-control" id="Email">
+            }
+        </div>
+        <div class="form-group">
+            <label class="form-check-label" for="Password">Пароль</label>
+            @if (ViewBag.Action == "update" || ViewBag.Errors != null)
+            {
+                <input name="Password" type="text" class="form-control" id="Password"
+                       value="@Model.Password">
+            }
+            else
+            {
+                <input name="Password" type="text" class="form-control" id="Password">
+            }
+        </div>
+        <input hidden name="RoleId" value="2" />
+        <button type="submit" class="btn btn-primary">@(ViewBag.Action == "update"?"Изменить":"Добавить")</button>
+    </form>

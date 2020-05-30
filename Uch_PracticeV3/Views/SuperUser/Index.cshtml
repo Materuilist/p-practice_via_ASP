@@ -1,0 +1,77 @@
+﻿@using Uch_PracticeV3.Models.Identity
+@model List<User>
+
+@{ 
+    ViewBag.Title = "Менеджеры УО";
+}
+
+<div id="header" class="row justify-content-between position-relative">
+    <div class="col-md-5 col-sm-6">
+        <h2 class="text-primary my-4">Таблица менеджеров УО:</h2>
+    </div>
+    <div class="col-md-4 col-sm-6 d-flex flex-column justify-content-around">
+        <div class="row align-items-center">
+            <button id="create-button" class="col-lg mx-2 btn btn-success">Добавить</button>
+            <button id="update-button" class="col-lg mx-2 btn btn-warning">Изменить</button>
+            <button id="delete-button" class="col-lg mx-2 btn btn-danger">Удалить</button>
+        </div>
+    </div>
+</div>
+<table class="table" id="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Код</th>
+            <th scope="col">Email</th>
+            <th scope="col">Пароль</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (User user in Model)
+        {
+        <tr>
+            <th scope="row">@user.Id</th>
+            <td>@user.Email</td>
+            <td>@user.Password</td>
+        </tr>
+        }
+    </tbody>
+</table>
+<script>
+    let currentAction = 'none';
+    $('#header').before(`
+        <div class="alert alert-info alert-dismissable fade position-absolute w-50 mx-auto" id="alert" style="z-index:100;left:0;right:0;top:5%;transition:all .5s ease-out;" role="alert">
+            Нажмите на любой ряд, чтобы совершить действие
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div >`);
+    const addButtonClickListener = (action = 'edit') => {
+        $(`#${action}-button`).on('click', () => {
+            const cells = $('#table').children('tbody').first().children('tr');
+            if (action === currentAction) {
+                cells.toggleClass('selectable').toggleClass(action + 'able');
+                cells.off('click.' + currentAction);
+                currentAction = 'none';
+                return;
+            }
+            else {
+                if (currentAction === 'none') {
+                    cells.toggleClass('selectable');
+                    $('#alert').addClass('show')
+                }
+                cells.toggleClass(action + 'able').toggleClass(currentAction + 'able');
+                cells.off('click.'+currentAction);
+                currentAction = action;
+                cells.on('click.'+currentAction, event => {
+                    const id = event.target.closest('tr').firstElementChild.textContent;
+                    window.location.assign(`/SuperUser/Managers/${currentAction}?rowId=${id}`);
+                });
+                return;
+            }
+        });
+    };
+    $('#create-button').on('click', () => window.location.assign('/SuperUser/Managers/create'));
+    addButtonClickListener('update');
+    addButtonClickListener('delete');
+</script>
+
