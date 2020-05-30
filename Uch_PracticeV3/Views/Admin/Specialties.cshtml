@@ -8,49 +8,56 @@
     <div class="col-md-4 col-sm-6 d-flex flex-column justify-content-around">
         <div class="row align-items-center">
             <button id="add-button" class="col-lg mx-2 btn btn-success">Добавить</button>
-            <button id="edit-button" class="col-lg mx-2 btn btn-warning">Изменить</button>
-            <button id="delete-button" class="col-lg mx-2 btn btn-danger">Удалить</button>
+            <button id="edit-button" class="col-lg mx-2 btn btn-warning" disabled="@(Model.Count==0)">Изменить</button>
+            <button id="delete-button" class="col-lg mx-2 btn btn-danger" disabled="@(Model.Count==0)">Удалить</button>
         </div>
     </div>
 </div>
-<table class="table" id="table">
-    <thead class="thead-dark">
-        <tr>
-            <th scope="col">Код</th>
-            <th scope="col">Направление подготовки</th>
-            <th scope="col">Группы</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (Specialty specialty in Model)
-        {
+@if (Model.Count == 0)
+{
+    <h4 class="text-primary my-4">Таблица пустая. Однако вы по-прежнему можете добавить данные!</h4>
+}
+else
+{
+    <table class="table" id="table">
+        <thead class="thead-dark">
             <tr>
-                <th scope="row">@specialty.Id</th>
-                <td>@specialty.Educational_Program</td>
-                <td>
-                    @if (specialty.Groups.Count == 0)
-                    {
-                        <span>Пусто...</span>
-                    }
-                    else
-                    {
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle btn-info" type="button" id="dropdownMenuButton"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                @specialty.Groups.First().Naming
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                @foreach (Group group in specialty.Groups)
-                                {
-                                    <span class="dropdown-item">@group.Naming</span>
-                                }
-                            </div>
-                        </div>
-                    }
-                </td>
+                <th scope="col">Код</th>
+                <th scope="col">Направление подготовки</th>
+                <th scope="col">Группы</th>
             </tr>
-        }
-    </tbody>
-</table>
-@{Html.RenderPartial("Pagination");}
+        </thead>
+        <tbody>
+            @foreach (Specialty specialty in Model)
+            {
+                <tr>
+                    <th scope="row">@specialty.Id</th>
+                    <td>@specialty.Educational_Program</td>
+                    <td>
+                        @if (specialty.Groups.Count == 0)
+                        {
+                            <span>Пусто...</span>
+                        }
+                        else
+                        {
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle btn-info" type="button" id="dropdownMenuButton"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    @specialty.Groups.First().Naming
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    @foreach (Group group in specialty.Groups)
+                                    {
+                                        <span class="dropdown-item">@group.Naming</span>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    Html.RenderPartial("Pagination");
+}
 @{Html.RenderPartial("ButtonsScript");}

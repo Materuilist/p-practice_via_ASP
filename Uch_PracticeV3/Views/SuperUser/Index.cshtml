@@ -12,11 +12,17 @@
     <div class="col-md-4 col-sm-6 d-flex flex-column justify-content-around">
         <div class="row align-items-center">
             <button id="create-button" class="col-lg mx-2 btn btn-success">Добавить</button>
-            <button id="update-button" class="col-lg mx-2 btn btn-warning">Изменить</button>
-            <button id="delete-button" class="col-lg mx-2 btn btn-danger">Удалить</button>
+            <button id="update-button" class="col-lg mx-2 btn btn-warning" disabled="@(Model.Count==0)">Изменить</button>
+            <button id="delete-button" class="col-lg mx-2 btn btn-danger" disabled="@(Model.Count==0)">Удалить</button>
         </div>
     </div>
 </div>
+@if (Model.Count == 0)
+{
+    <h4 class="text-primary my-4">Таблица пустая. Однако вы по-прежнему можете добавить данные!</h4>
+}
+else
+{
 <table class="table" id="table">
     <thead class="thead-dark">
         <tr>
@@ -36,6 +42,7 @@
         }
     </tbody>
 </table>
+}
 <script>
     let currentAction = 'none';
     $('#header').before(`
