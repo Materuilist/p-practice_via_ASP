@@ -27,6 +27,7 @@ namespace Uch_PracticeV3.Controllers
         {
             ViewBag.url = Request.Url.AbsolutePath;
             ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
+            ViewBag.isSuperUser = AuthenticationManager.User.Identity.GetUserRole() == "superuser";
             var users = await (from user in db.Users where user.RoleId == 2 select user).ToListAsync();
             return View(users);
         }
@@ -39,6 +40,7 @@ namespace Uch_PracticeV3.Controllers
             ViewBag.Action = "create";
             ViewBag.url = Request.Url.AbsolutePath;
             ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
+            ViewBag.isSuperUser = AuthenticationManager.User.Identity.GetUserRole() == "superuser";
             return View("Modify", new User());
         }
         [Route("SuperUser/Managers/update")]
@@ -55,6 +57,7 @@ namespace Uch_PracticeV3.Controllers
             ViewBag.Action = "update";
             ViewBag.url = Request.Url.AbsolutePath;
             ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
+            ViewBag.isSuperUser = AuthenticationManager.User.Identity.GetUserRole() == "superuser";
             return View("Modify", await db.Users.FindAsync(rowId));
         }
         [Route("SuperUser/Managers/delete")]
@@ -87,6 +90,7 @@ namespace Uch_PracticeV3.Controllers
                 ViewBag.Title = "Менеджеры";
                 ViewBag.url = Request.Url.AbsolutePath;
                 ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
+                ViewBag.isSuperUser = AuthenticationManager.User.Identity.GetUserRole() == "superuser";
                 ViewBag.Action = "create";
                 ViewBag.Errors = ModelState.Values.Select(ms => ms.Errors.FirstOrDefault()).Where(error => error != null);
                 return View("Modify", user);
@@ -111,6 +115,7 @@ namespace Uch_PracticeV3.Controllers
                 ViewBag.Title = "Менеджеры";
                 ViewBag.url = Request.Url.AbsolutePath;
                 ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
+                ViewBag.isSuperUser = AuthenticationManager.User.Identity.GetUserRole() == "superuser";
                 ViewBag.Action = "update";
                 ViewBag.Errors = ModelState.Values.Select(ms => ms.Errors.FirstOrDefault()).Where(error => error != null);
                 return View("Modify", user);

@@ -10,7 +10,7 @@ namespace Uch_PracticeV3.Models.Identity
     {
         protected override void Seed(UserContext db)
         {
-            db.Roles.Add(new Role { Id = 1, Name = "admin" });
+            db.Roles.Add(new Role { Id = 1, Name = "superuser" });
             db.Roles.Add(new Role { Id = 2, Name = "manager" });
             db.Users.Add(new User
             {

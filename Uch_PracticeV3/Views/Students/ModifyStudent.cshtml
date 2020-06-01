@@ -1,10 +1,10 @@
 ﻿@using Uch_PracticeV3.Models
 @model Student
 
-    <form action="/Admin/Students/@ViewBag.Action" method="post" class="my-3">
+    <form action="/Students/@ViewBag.Action" method="post" class="my-3">
         @Html.AntiForgeryToken()
         <div class="form-group">
-            @if (ViewBag.Action == "edit")
+            @if (ViewBag.Action == "Update")
             {
                 <input hidden class="form-control" name="Id" value="@Model.Id" />
             }
@@ -23,7 +23,7 @@
         </div>
         <div class="form-group">
             <label for="Surname">Фамилия</label>
-            @if (ViewBag.Action == "edit" || ViewBag.Errors != null)
+            @if (ViewBag.Action == "Update" || ViewBag.Errors != null)
             {
                 <input name="Surname" required maxlength="30" type="text" class="form-control" id="Surname"
                        value="@Model.Surname">
@@ -35,7 +35,7 @@
         </div>
         <div class="form-group">
             <label for="Name">Имя</label>
-            @if (ViewBag.Action == "edit" || ViewBag.Errors != null)
+            @if (ViewBag.Action == "Update" || ViewBag.Errors != null)
             {
                 <input name="Name" required maxlength="30" type="text" class="form-control" id="Name"
                        value="@Model.Name">
@@ -47,7 +47,7 @@
         </div>
         <div class="form-group">
             <label for="Patronymic">Отчество</label>
-            @if (ViewBag.Action == "edit" || ViewBag.Errors != null)
+            @if (ViewBag.Action == "Update" || ViewBag.Errors != null)
             {
                 <input name="Patronymic" required maxlength="20" type="text" class="form-control" id="Patronymic"
                        value="@Model.Patronymic">
@@ -62,7 +62,7 @@
             <select class="form-control" name="GroupId" id="GroupId">
                 @foreach (Group group in ViewBag.Groups)
                 {
-                    if (ViewBag.Action == "edit" || ViewBag.Errors != null)
+                    if (ViewBag.Action == "Update" || ViewBag.Errors != null)
                     {
                         <option selected="@(group.Id == @Model.GroupId)" data-toggle="tooltip"
                                 data-placement="right" title="@group.Naming">
@@ -81,7 +81,7 @@
             <select class="form-control" name="LeaderId" id="LeaderId">
                 @foreach (Leader leader in ViewBag.Leaders)
                 {
-                    if (ViewBag.Action == "edit" || ViewBag.Errors != null)
+                    if (ViewBag.Action == "Update" || ViewBag.Errors != null)
                     {
                         <option selected="@(leader.Id == @Model.LeaderId)" data-toggle="tooltip"
                                 data-placement="right" title="@leader.Surname">
@@ -100,7 +100,7 @@
             <select class="form-control" name="ContractId" id="ContractId">
                 @foreach (Contract contract in ViewBag.Contracts)
                 {
-                    if (ViewBag.Action == "edit" || ViewBag.Errors != null)
+                    if (ViewBag.Action == "Update" || ViewBag.Errors != null)
                     {
                         <option selected="@(contract.Id == @Model.ContractId)" data-toggle="tooltip"
                                 data-placement="right" title="@contract.Enter_Date">
@@ -116,7 +116,7 @@
         </div>
         <div class="form-group">
             <label for="FileNaming">Название отчета</label>
-            @if (ViewBag.Action == "edit" || ViewBag.Errors != null)
+            @if (ViewBag.Action == "Update" || ViewBag.Errors != null)
             {
                 <input name="FileNaming" maxlength="50" type="text" class="form-control" id="FileNaming"
                        value="@Model.FileNaming">
@@ -134,7 +134,7 @@
         </div>
         <div class="form-group">
             <label for="Result">Результат</label>
-            @if (ViewBag.Action == "edit" || ViewBag.Errors != null)
+            @if (ViewBag.Action == "Update" || ViewBag.Errors != null)
             {
                 <input name="Result" max="10" min="0" type="number" class="form-control" id="Result"
                        value="@Model.Result">
@@ -144,7 +144,7 @@
                 <input name="Result" max="10" min="0" type="number" class="form-control" id="Result">
             }
         </div>
-        <button type="submit" class="btn btn-primary">@(ViewBag.Action == "edit"?"Изменить":"Добавить")</button>
+        <button type="submit" class="btn btn-primary">@(ViewBag.Action == "Update"?"Изменить":"Добавить")</button>
     </form>
 
 <script>

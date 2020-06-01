@@ -1,9 +1,9 @@
 ﻿@using Uch_PracticeV3.Models
 @model Contract
 
-    <form action="/Admin/Contracts/@ViewBag.Action" method="post" class="my-3">
+    <form action="/Contracts/@ViewBag.Action" method="post" class="my-3">
         @Html.AntiForgeryToken()
-        @if (ViewBag.Action == "edit")
+        @if (ViewBag.Action == "Update")
         {
             <input hidden name="Id" value="@Model.Id" />
         }
@@ -12,7 +12,7 @@
             <select class="form-control" name="OrganizationId" id="OrganizationId">
                 @foreach (Organization org in ViewBag.Organizations)
                 {
-                    if (ViewBag.Action == "edit" || ViewBag.Errors!=null)
+                    if (ViewBag.Action == "Update" || ViewBag.Errors!=null)
                     {
                         <option selected="@(@org.Id == @Model.OrganizationId)" data-toggle="tooltip"
                                 data-placement="right" title="@org.FullNaming">
@@ -28,7 +28,7 @@
         </div>
         <div class="form-group">
             <label for="Enter_Date">Дата заключения</label>
-            @if (ViewBag.Action == "edit" || ViewBag.Errors != null)
+            @if (ViewBag.Action == "Update" || ViewBag.Errors != null)
             {
                 <input required name="Enter_Date" type="date" class="form-control" id="Enter_Date"
                        value="@(@Model.Enter_Date.ToString("yyyy-MM-dd"))">
@@ -40,7 +40,7 @@
         </div>
         <div class="form-group">
             <label class="form-check-label" for="Termination_Date">Дата расторжения</label>
-            @if (ViewBag.Action == "edit" || ViewBag.Errors != null)
+            @if (ViewBag.Action == "Update" || ViewBag.Errors != null)
             {
                 <input name="Termination_Date" type="date" class="form-control" id="Termination_Date"
                        value="@(@Model.Termination_Date?.ToString("yyyy-MM-dd"))">
@@ -50,5 +50,5 @@
                 <input name="Termination_Date" type="date" class="form-control" id="Termination_Date">
             }
         </div>
-        <button type="submit" class="btn btn-primary">@(ViewBag.Action == "edit"?"Изменить":"Добавить")</button>
+        <button type="submit" class="btn btn-primary">@(ViewBag.Action == "Update"?"Изменить":"Добавить")</button>
     </form>

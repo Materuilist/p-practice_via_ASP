@@ -1,10 +1,10 @@
 ﻿@using Uch_PracticeV3.Models
 @model Specialty
 
-    <form action="/Admin/Specialties/@ViewBag.Action" method="post" class="my-3">
+    <form action="/Specialties/@ViewBag.Action" method="post" class="my-3">
         @Html.AntiForgeryToken()
         <div class="form-group">
-            @if (ViewBag.Action == "edit")
+            @if (ViewBag.Action == "Update")
             {
                 <input hidden class="form-control" name="Id" value="@Model.Id" />
             }
@@ -23,7 +23,7 @@
         </div>
         <div class="form-group">
             <label for="Educational_Program">Направление подготовки</label>
-            @if (ViewBag.Action == "edit" || ViewBag.Errors != null)
+            @if (ViewBag.Action == "Update" || ViewBag.Errors != null)
             {
                 <input name="Educational_Program" maxlength="70" type="text" class="form-control" id="Educational_Program"
                        value="@Model.Educational_Program">
@@ -33,5 +33,5 @@
                 <input name="Educational_Program" maxlength="70" type="text" class="form-control" id="Educational_Program">
             }
         </div>
-        <button type="submit" class="btn btn-primary">@(ViewBag.Action == "edit"?"Изменить":"Добавить")</button>
+        <button type="submit" class="btn btn-primary">@(ViewBag.Action == "Update"?"Изменить":"Добавить")</button>
     </form>

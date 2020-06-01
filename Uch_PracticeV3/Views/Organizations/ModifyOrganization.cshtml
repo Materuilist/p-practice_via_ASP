@@ -1,10 +1,10 @@
 ﻿@using Uch_PracticeV3.Models
 @model Organization
 
-    <form action="/Admin/Organizations/@ViewBag.Action" method="post" class="my-3">
+    <form action="/Organizations/@ViewBag.Action" method="post" class="my-3">
         @Html.AntiForgeryToken()
         <div class="form-group">
-            @if (ViewBag.Action == "edit")
+            @if (ViewBag.Action == "Update")
             {
                 <input hidden class="form-control" name="Id" value="@Model.Id" />
             }
@@ -25,7 +25,7 @@
         </div>
         <div class="form-group">
             <label for="ShortNaming">Короткое название</label>
-            @if (ViewBag.Action == "edit" || ViewBag.Errors != null)
+            @if (ViewBag.Action == "Update" || ViewBag.Errors != null)
             {
                 <input name="ShortNaming" maxlength="20" type="text" class="form-control" id="ShortNaming"
                        value="@Model.ShortNaming">
@@ -37,7 +37,7 @@
         </div>
         <div class="form-group">
             <label for="FullNaming">Полное название</label>
-            @if (ViewBag.Action == "edit" || ViewBag.Errors != null)
+            @if (ViewBag.Action == "Update" || ViewBag.Errors != null)
             {
                 <input name="FullNaming" maxlength="30" required type="text" class="form-control" id="FullNaming"
                        value="@Model.FullNaming">
@@ -52,7 +52,7 @@
             <select class="form-control" name="SectorId" id="SectorId">
                 @foreach (Sector sector in ViewBag.Sectors)
                 {
-                    if (ViewBag.Action == "edit" || ViewBag.Errors != null)
+                    if (ViewBag.Action == "Update" || ViewBag.Errors != null)
                     {
                         <option selected="@(sector.Id == @Model.SectorId)" data-toggle="tooltip"
                                 data-placement="right" title="@sector.Naming">
@@ -66,5 +66,5 @@
                 }
             </select>
         </div>
-        <button type="submit" class="btn btn-primary">@(ViewBag.Action == "edit"?"Изменить":"Добавить")</button>
+        <button type="submit" class="btn btn-primary">@(ViewBag.Action == "Update"?"Изменить":"Добавить")</button>
     </form>

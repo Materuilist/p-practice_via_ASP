@@ -23,6 +23,7 @@ namespace Uch_PracticeV3.Controllers
         {
             ViewBag.url = Request.Url.AbsolutePath;
             ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
+            ViewBag.isSuperUser = AuthenticationManager.User.Identity.GetUserRole() == "superuser";
             return View();
         }
     }

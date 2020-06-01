@@ -33,6 +33,7 @@ namespace Uch_PracticeV3.Controllers
         {
             ViewBag.url = Request.Url.AbsolutePath;
             ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
+            ViewBag.isSuperUser = AuthenticationManager.User.Identity.GetUserRole() == "superuser";
             return View();
         }
 
@@ -40,6 +41,7 @@ namespace Uch_PracticeV3.Controllers
         {
             ViewBag.url = Request.Url.AbsolutePath;
             ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
+            ViewBag.isSuperUser = AuthenticationManager.User.Identity.GetUserRole() == "superuser";
             return await HandleRequest(Queries.Students_Marks, "Оценки студентов");
         }
 
@@ -47,6 +49,7 @@ namespace Uch_PracticeV3.Controllers
         {
             ViewBag.url = Request.Url.AbsolutePath;
             ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
+            ViewBag.isSuperUser = AuthenticationManager.User.Identity.GetUserRole() == "superuser";
             return await HandleRequest(Queries.GroupMarks, "Средние оценки студентов (по группам)");
         }
 
@@ -54,6 +57,7 @@ namespace Uch_PracticeV3.Controllers
         {
             ViewBag.url = Request.Url.AbsolutePath;
             ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
+            ViewBag.isSuperUser = AuthenticationManager.User.Identity.GetUserRole() == "superuser";
             return await HandleRequest(Queries.ContractsTerminations, $"Предприятия, договор с которыми закончится до " +
                 $"{Request.QueryString.Get("param")} года");
         }
@@ -62,6 +66,7 @@ namespace Uch_PracticeV3.Controllers
         {
             ViewBag.url = Request.Url.AbsolutePath;
             ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
+            ViewBag.isSuperUser = AuthenticationManager.User.Identity.GetUserRole() == "superuser";
             return await HandleRequest(Queries.LeadersStudents, "Количество студентов в распоряжении руководителей");
         }
 
@@ -70,6 +75,7 @@ namespace Uch_PracticeV3.Controllers
         {
             ViewBag.url = Request.Url.AbsolutePath;
             ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
+            ViewBag.isSuperUser = AuthenticationManager.User.Identity.GetUserRole() == "superuser";
             return await HandleRequest(Queries.PopularOrganizations, "Самые популярные предприятия");
         }
         private async Task<ActionResult> HandleRequest(Queries queryName, string templateTitle)

@@ -1,15 +1,15 @@
 ﻿@using Uch_PracticeV3.Models
-@model List<Organization>
+@model List<Group>
 
 <div class="row justify-content-between">
     <div class="col-md-4 col-sm-6">
-        <h2 class="text-primary my-4">Таблица организаций:</h2>
+        <h2 class="text-primary my-4">Таблица групп:</h2>
     </div>
     <div class="col-md-4 col-sm-6 d-flex flex-column justify-content-around">
         <div class="row align-items-center">
-            <button id="add-button" class="col-lg mx-2 btn btn-success">Добавить</button>
-            <button id="edit-button" class="col-lg mx-2 btn btn-warning" disabled="@(Model.Count==0)">Изменить</button>
-            <button id="delete-button" class="col-lg mx-2 btn btn-danger" disabled="@(Model.Count==0)">Удалить</button>
+            <button id="Create-button" class="col-lg mx-2 btn btn-success">Добавить</button>
+            <button id="Update-button" class="col-lg mx-2 btn btn-warning" disabled="@(Model.Count==0)">Изменить</button>
+            <button id="Delete-button" class="col-lg mx-2 btn btn-danger" disabled="@(Model.Count==0)">Удалить</button>
         </div>
     </div>
 </div>
@@ -23,21 +23,20 @@ else
         <thead class="thead-dark">
             <tr>
                 <th scope="col">Код</th>
-                <th scope="col">Короткое название</th>
-                <th scope="col">Полное название</th>
-                <th scope="col">Договоры (дата заключения)</th>
-                <th scope="col">Отрасль</th>
+                <th scope="col">Название</th>
+                <th scope="col">Направление подготовки</th>
+                <th scope="col">Студенты</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (Organization organization in Model)
+            @foreach (Group group in Model)
             {
                 <tr>
-                    <th scope="row">@organization.Id</th>
-                    <td>@organization.ShortNaming</td>
-                    <td>@organization.FullNaming</td>
+                    <th scope="row">@group.Id</th>
+                    <td>@group.Naming</td>
+                    <td>@group.Specialty.Educational_Program</td>
                     <td>
-                        @if (organization.Contracts.Count == 0)
+                        @if (group.Students.Count == 0)
                         {
                             <span>Пусто...</span>
                         }
@@ -46,18 +45,17 @@ else
                             <div class="dropdown">
                                 <button class="btn btn-secondary dropdown-toggle btn-info" type="button" id="dropdownMenuButton"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    @organization.Contracts.First().Enter_Date
+                                    @group.Students.First().Surname
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    @foreach (Contract contract in organization.Contracts)
+                                    @foreach (Student student in group.Students)
                                     {
-                                        <span class="dropdown-item">@contract.Enter_Date</span>
+                                        <span class="dropdown-item">@student.Surname</span>
                                     }
                                 </div>
                             </div>
                         }
                     </td>
-                    <td>@organization.Sector.Naming</td>
                 </tr>
             }
         </tbody>

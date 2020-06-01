@@ -25,6 +25,7 @@ namespace Uch_PracticeV3.Controllers
         {
             ViewBag.url = Request.Url.AbsolutePath;
             ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
+            ViewBag.isSuperUser = AuthenticationManager.User.Identity.GetUserRole() == "superuser";
             //test data
             //var user = new ApplicationUser()
             //{ Email = "kirpetrosian@mail.ru", UserName = "kirpetrosian@mail.ru", Year = 2000 };
@@ -41,6 +42,7 @@ namespace Uch_PracticeV3.Controllers
         {
             ViewBag.url = Request.Url.AbsolutePath;
             ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
+            ViewBag.isSuperUser = AuthenticationManager.User.Identity.GetUserRole() == "superuser";
             ViewBag.Message = "Your application description page.";
 
             return View();
@@ -50,6 +52,7 @@ namespace Uch_PracticeV3.Controllers
         {
             ViewBag.url = Request.Url.AbsolutePath;
             ViewBag.authed = AuthenticationManager.User.Identity.IsAuthenticated;
+            ViewBag.isSuperUser = AuthenticationManager.User.Identity.GetUserRole() == "superuser";
             ViewBag.Message = "Your contact page.";
 
             return View();

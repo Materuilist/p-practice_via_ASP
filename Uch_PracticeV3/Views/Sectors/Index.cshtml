@@ -1,15 +1,15 @@
 ﻿@using Uch_PracticeV3.Models
-@model List<Group>
+@model List<Sector>
 
 <div class="row justify-content-between">
     <div class="col-md-4 col-sm-6">
-        <h2 class="text-primary my-4">Таблица групп:</h2>
+        <h2 class="text-primary my-4">Таблица отраслей:</h2>
     </div>
     <div class="col-md-4 col-sm-6 d-flex flex-column justify-content-around">
         <div class="row align-items-center">
-            <button id="add-button" class="col-lg mx-2 btn btn-success">Добавить</button>
-            <button id="edit-button" class="col-lg mx-2 btn btn-warning" disabled="@(Model.Count==0)">Изменить</button>
-            <button id="delete-button" class="col-lg mx-2 btn btn-danger" disabled="@(Model.Count==0)">Удалить</button>
+            <button id="Create-button" class="col-lg mx-2 btn btn-success">Добавить</button>
+            <button id="Update-button" class="col-lg mx-2 btn btn-warning" disabled="@(Model.Count==0)">Изменить</button>
+            <button id="Delete-button" class="col-lg mx-2 btn btn-danger" disabled="@(Model.Count==0)">Удалить</button>
         </div>
     </div>
 </div>
@@ -24,19 +24,17 @@ else
             <tr>
                 <th scope="col">Код</th>
                 <th scope="col">Название</th>
-                <th scope="col">Направление подготовки</th>
-                <th scope="col">Студенты</th>
+                <th scope="col">Предприятия</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (Group group in Model)
+            @foreach (Sector sector in Model)
             {
                 <tr>
-                    <th scope="row">@group.Id</th>
-                    <td>@group.Naming</td>
-                    <td>@group.Specialty.Educational_Program</td>
+                    <th scope="row">@sector.Id</th>
+                    <td>@sector.Naming</td>
                     <td>
-                        @if (group.Students.Count == 0)
+                        @if (sector.Organizations.Count == 0)
                         {
                             <span>Пусто...</span>
                         }
@@ -45,12 +43,12 @@ else
                             <div class="dropdown">
                                 <button class="btn btn-secondary dropdown-toggle btn-info" type="button" id="dropdownMenuButton"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    @group.Students.First().Surname
+                                    @sector.Organizations.First().FullNaming
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    @foreach (Student student in group.Students)
+                                    @foreach (Organization organization in sector.Organizations)
                                     {
-                                        <span class="dropdown-item">@student.Surname</span>
+                                        <span class="dropdown-item">@organization.FullNaming</span>
                                     }
                                 </div>
                             </div>

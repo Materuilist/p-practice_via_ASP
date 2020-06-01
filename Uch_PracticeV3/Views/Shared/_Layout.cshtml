@@ -32,10 +32,14 @@
                         <a class="dropdown-item" href="/Queries">Просмотр</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/Admin/Index">Для менеджеров УО</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/SuperUser">Для администраторов</a>
                     </div>
                 </li>
+                @if (ViewBag.isSuperUser)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewBag.url.Split('/')[1]=="SuperUser"?"active":"")" href="/SuperUser">Менеджеры УО</a>
+                    </li>
+                }
             </ul>
             <span class="navbar-text">
                 <a class="nav-link" href="@(ViewBag.authed?"/Account/Logout":"/Account/Login")">
@@ -46,10 +50,10 @@
     <div class="container body-content position-relative">
         @if (ViewBag.Errors != null)
         {
-            <div class="container position-fixed px-0">
+            <div class="container position-fixed px-0 mx-auto" style="width:fit-content;left:0;right:0;">
                 @foreach (ModelError error in ViewBag.Errors)
                 {
-                    <div class="row w-50 mx-auto alert alert-danger alert-dismissible fade show" role="alert">
+                    <div class="row mx-auto alert alert-danger alert-dismissible fade show" role="alert">
                         <strong>Ошибка!</strong> @error.ErrorMessage
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>

@@ -7,7 +7,7 @@
             <span aria-hidden="true">&times;</span>
         </button>
         </div >`);
-    const addButtonClickListener = (action = 'edit') => {
+    const addButtonClickListener = (action = 'Update') => {
         $(`#${action}-button`).on('click', () => {
             const cells = $('#table').children('tbody').first().children('tr');
             if (action === currentAction) {
@@ -26,13 +26,13 @@
                 currentAction = action;
                 cells.on('click.'+currentAction, event => {
                     const id = event.target.closest('tr').firstElementChild.textContent;
-                    window.location.assign(`/Admin/@ViewBag.Table?action=${currentAction}&rowId=${id}`);
+                    window.location.assign(`@ViewBag.Table/${currentAction}?rowId=${id}`);
                 });
                 return;
             }
         });
     };
-    $('#add-button').on('click', () => window.location.assign('/Admin/@ViewBag.Table?action=add'));
-    addButtonClickListener('edit');
-    addButtonClickListener('delete');
+    $('#Create-button').on('click', () => window.location.assign('@ViewBag.Table/Create'));
+    addButtonClickListener('Update');
+    addButtonClickListener('Delete');
 </script>

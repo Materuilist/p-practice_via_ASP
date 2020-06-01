@@ -3,10 +3,10 @@
     cursor:pointer;
 }
 
-.editable, .updateable{
+.Updateable{
     color:#ff9a00;
 }
 
-.deleteable{
+.Deleteable{
     color:#ff0000;
 }
